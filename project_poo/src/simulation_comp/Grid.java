@@ -2,6 +2,8 @@ package simulation_comp;
 
 import java.util.ArrayList;
 
+import dynamic_comp.Population;
+
 public class Grid {
 	
 	/* Fields */
