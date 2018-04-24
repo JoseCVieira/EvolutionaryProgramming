@@ -1,4 +1,7 @@
-package simulation_comp;
+package dynamic_comp;
+
+import simulation_comp.Path;
+import simulation_comp.Point;
 
 public class Individual {
 
