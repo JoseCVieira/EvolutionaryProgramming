@@ -1,6 +1,6 @@
 -para que serve o n_obsts?
 -edge abrangida por 2 special zones?
--antes do Evmove tempo de verificar o "dist" do ind: se for 0 (já chegou ao fim) é para apagar todos os eventos dele?
+-antes do Evmove temos de verificar o "dist" do indidou: se for 0 (já chegou ao fim) é para apagar todos os eventos dele?
 -UML -> arrayList = array normal?
 -UML -> hash, equals, tostring?
 
