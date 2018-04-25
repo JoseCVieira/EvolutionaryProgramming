@@ -12,5 +12,4 @@ public class EvMove extends Event {
 		return 'M';
 	}
 
-	
 }

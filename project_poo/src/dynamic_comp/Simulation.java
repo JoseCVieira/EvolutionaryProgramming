@@ -3,7 +3,7 @@ package dynamic_comp;
 import java.util.Iterator;
 import java.util.Random;
 
-import simulation_comp.Point;
+import static_comp.Point;
 
 public class Simulation {
 	
@@ -31,9 +31,9 @@ public class Simulation {
 			//new reproduction time for the parent
 			pec.addEvent(new EvReproduction(current_time + expRandom(reprod_param),current_event.individual));
 			//new child and 3 new events
-			Individual i = new Individual(initial_pos);
-			population.addIndividual(i);
-			createNewBornEvents(i);
+			//Individual i = new Individual(initial_pos); //mudar isto -> tem de ser o outro construtor
+			//population.addIndividual(i);
+			//createNewBornEvents(i);
 		}
 		else if(current_event.action() == 'D'){
 			//eliminates all the events that belong to the individual that died

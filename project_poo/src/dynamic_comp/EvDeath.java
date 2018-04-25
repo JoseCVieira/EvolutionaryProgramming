@@ -12,5 +12,4 @@ public class EvDeath extends Event{
 		return 'D';
 	}
 	
-	
 }

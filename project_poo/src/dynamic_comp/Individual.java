@@ -1,48 +1,62 @@
 package dynamic_comp;
 
-import simulation_comp.Path;
-import simulation_comp.Point;
+import java.util.ArrayList;
+
+import static_comp.Edge;
+import static_comp.Path;
+import static_comp.Point;
 
 public class Individual {
 
 	/* Fields */
-	private int length;  // TODO length = path.getLength();
-	private int dist;	 // TODO dist = calculateDist();
-	private int length_prefix;
-	private Point position;
+	private int length;
+	private int dist;
+	private Point position, final_pos;
 	Path path;
 	
 	/* Constructors */
-	public Individual(Point position) {
-		this.setPosition(position);
+	public Individual(Point position, Point final_pos) {
+		this.position = position;
+		this.final_pos = final_pos;
+		calculateDist();
 		path = new Path();
-		dist = calculateDist();
-		length = 0; // default ja e 0.. fica na mesma?
 	}
 	
-	public Individual(Point position, Path path, int length_prefix) {
-		this.setPosition(position);
+	public Individual(Path path, int length_prefix, Point final_pos) {
 		this.path = path;
-		this.length_prefix = length_prefix;
-		this.position = position;
+		this.final_pos = final_pos;
 		
-		//TODO path = .... remover parte do path (length_prefix)
-		//TODO length = ....
-		dist = calculateDist();
+		path.removeEdges((int)Math.floor(path.getEdges().size() * length_prefix));
+		ArrayList<Edge> edges = path.getEdges();
+		Point[] points = edges.get(edges.size() - 1).getPoints();
+		
+		length = edges.size();
+		position = points[1];
+		calculateDist();
 	}
 	
 	/* Methods */
-	int calculateDist(){
-		//TODO
-		return 0;
+	private void calculateDist(){
+		dist = Math.abs(position.getX() - final_pos.getX()) + Math.abs(position.getY() - final_pos.getY());
+	}
+
+	public void Move(Point position) {
+		// TODO depois de fazer move length = path.getLength();
+		
+		this.position = position;
+		calculateDist();
 	}
 
 	public Point getPosition() {
 		return position;
 	}
-
-	public void setPosition(Point position) {
-		this.position = position;
+	
+	public int getDist() {
+		return dist;
+	}
+	
+	public int getLength() {
+		return length;
 	}
 	
 }
