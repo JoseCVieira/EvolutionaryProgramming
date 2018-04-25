@@ -10,7 +10,6 @@ public class Path {
 	
 	/* Constructor */
 	public Path() {
-		//cost = 0;
 		edges = new ArrayList<Edge>();
 	}
 	
@@ -32,6 +31,10 @@ public class Path {
 
 	public int getCost() {
 		return cost;
+	}
+	
+	public int getPathLength() {
+		return edges.size();
 	}
 
 	public ArrayList<Edge> getEdges() {

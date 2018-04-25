@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Grid {
 	
 	/* Fields */
+	private int n_obst; //para que vai servir isto???
 	private int row;
 	private int col;
 	private int cmax;
@@ -13,7 +14,8 @@ public class Grid {
 	private ArrayList<Edge> sZones;
 	
 	/* Constructor */
-	public Grid(int row, int col, ArrayList<Point> obts, ArrayList<Edge> sZones){
+	public Grid(int n_obst, int row, int col, ArrayList<Point> obts, ArrayList<Edge> sZones){
+		this.n_obst = n_obst;
 		this.row = row;
 		this.col = col;
 		this.obts = obts;
@@ -31,8 +33,8 @@ public class Grid {
 		Point point_1, point_2;
 		Edge edge;
 		
-		for(int i = 1; i <= row; i++) { //cols
-			for(int j = 1; j <= col; j++) { //rows
+		for(int i = 1; i <= row; i++) {
+			for(int j = 1; j <= col; j++) {
 				point_1 = new Point(i, j);
 				
 				if(j != col) {
@@ -91,6 +93,10 @@ public class Grid {
 	
 	public int getCol() {
 		return col;
+	}
+	
+	public int getN_obst() {
+		return n_obst;
 	}
 	
 	/* auxiliary methods */

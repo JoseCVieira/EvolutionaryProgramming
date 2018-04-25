@@ -9,24 +9,24 @@ public class Population {
 	/* Fields */
 	private int initial_pop;
 	private int max_pop;
-	private int k;
+	private int comfort_param;
 	private Point initial_pos, final_pos;
 	private ArrayList<Individual> individuals;
 	
 	/* Constructor */
-	public Population(int initial_pop, int max_pop, int k, Point initial_pos, Point final_pos) {
+	public Population(int initial_pop, int max_pop, int comfort_param, Point initial_pos, Point final_pos) {
 		this.initial_pop = initial_pop;
 		this.initial_pos = initial_pos;
 		this.final_pos = final_pos;
 		this.max_pop = max_pop;
-		this.k = k;
+		this.comfort_param = comfort_param;
 		
 		individuals = new ArrayList<Individual>();
 		startPopulating();
 	}
 	
 	/* Methods */
-	void startPopulating(){
+	private void startPopulating(){
 		for(int elements = 0; elements < initial_pop; elements++)
 			addIndividual(new Individual(this.initial_pos, this.final_pos));
 	}
@@ -49,8 +49,8 @@ public class Population {
 		
 	}
 
-	public int getK() {
-		return k;
+	public int getComfort_param() {
+		return comfort_param;
 	}
 	
 	public ArrayList<Individual> getIndividuals() {

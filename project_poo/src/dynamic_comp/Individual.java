@@ -12,7 +12,7 @@ public class Individual {
 	private int length;
 	private int dist;
 	private Point position, final_pos;
-	Path path;
+	private Path path;
 	
 	/* Constructors */
 	public Individual(Point position, Point final_pos) {
@@ -26,11 +26,10 @@ public class Individual {
 		this.path = path;
 		this.final_pos = final_pos;
 		
-		path.removeEdges((int)Math.floor(path.getEdges().size() * length_prefix));
-		ArrayList<Edge> edges = path.getEdges();
-		Point[] points = edges.get(edges.size() - 1).getPoints();
+		path.removeEdges((int)Math.floor(path.getPathLength() * length_prefix));
+		Point[] points = path.getEdges().get(path.getPathLength() - 1).getPoints();
 		
-		length = edges.size();
+		length = path.getPathLength();
 		position = points[1];
 		calculateDist();
 	}
@@ -40,10 +39,20 @@ public class Individual {
 		dist = Math.abs(position.getX() - final_pos.getX()) + Math.abs(position.getY() - final_pos.getY());
 	}
 
-	public void Move(Point position) {
-		// TODO depois de fazer move length = path.getLength();
+	public void move(Point new_position) {
+		int cost = 0;
 		
-		this.position = position;
+		ArrayList<Edge> edges = path.getEdges();
+		Edge new_edge = new Edge(position, new_position, 1);
+		
+		for(Edge edge : edges)
+			if(edge.equals(new_edge))
+				cost = edge.getCost();
+		
+		new_edge.setCost(cost);
+		path.addEdge(new_edge);
+		position = new_position;
+		length = path.getPathLength();
 		calculateDist();
 	}
 

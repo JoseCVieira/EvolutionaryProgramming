@@ -42,7 +42,6 @@ public class Edge {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + cost;
 		result = prime * result + Arrays.hashCode(points);
 		return result;
 	}
@@ -56,8 +55,6 @@ public class Edge {
 		if (getClass() != obj.getClass())
 			return false;
 		Edge other = (Edge) obj;
-		if (cost != other.cost)
-			return false;
 		if (!Arrays.equals(points, other.points))
 			return false;
 		return true;

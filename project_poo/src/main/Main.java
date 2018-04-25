@@ -10,8 +10,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		int col = 4;
-		int row = 5;
+		int col = 2;
+		int row = 3;
 		
 		Point initialPoint = new Point(1, 1);
 		Point finalPoint = new Point(5, 4);
@@ -43,7 +43,7 @@ public class Main {
 		int move_param = 1;
 		int reprod_param = 1;
 		
-		Grid grid = new Grid(col, row, obsts, sZones);
+		Grid grid = new Grid(n_obst, col, row, obsts, sZones);
 	}
 	
 }
