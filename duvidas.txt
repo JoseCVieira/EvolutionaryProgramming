@@ -1,13 +1,9 @@
 -para que serve o n_obsts?
--edge abrangida por 2 special zones?
--antes do Evmove tempo de verificar o "dist" do ind: se for 0 (já chegou ao fim) é para apagar todos os eventos dele?
 -UML -> arrayList = array normal?
--UML -> hash, equals, tostring?
 
 -falta ver todas as visibilitys da população
 -falta fazer todas as descrições dos métodos (@param ....)
 -docs??
--specialzones é só 1 quadrado ou pode ser maior? (neste momento ja nao interessa muito)
 -exceções:
     - read file :
         -dataPathUnnexists

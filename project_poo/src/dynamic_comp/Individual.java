@@ -26,7 +26,7 @@ public class Individual {
 		this.path = path;
 		this.final_pos = final_pos;
 		
-		path.removeEdges((int)Math.floor(path.getPathLength() * length_prefix));
+		path.removeEdges((int)Math.ceil(path.getPathLength() * length_prefix)); //ceil() method rounds a number UPWARDS to the nearest integer
 		Point[] points = path.getEdges().get(path.getPathLength() - 1).getPoints();
 		
 		length = path.getPathLength();

@@ -56,6 +56,7 @@ public class Grid {
 		for(Edge edge : edges)
 			for(Edge sZone : sZones)
 				if(is_specialEdge(edge, sZone))
+					if(edge.getCost() < sZone.getCost())
 						edge.setCost(sZone.getCost());
 		
 	}
