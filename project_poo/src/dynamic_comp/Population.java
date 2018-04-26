@@ -1,6 +1,7 @@
 package dynamic_comp;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static_comp.Point;
 
@@ -46,7 +47,41 @@ public class Population {
 	}
 	
 	void epidemic(){
+		int count=0;
+		Random random = new Random();
+		float nextFloat;
 		
+		ArrayList<Individual> aux = new ArrayList<Individual>();
+		for(int survivors = 0; survivors < 5; survivors++){
+			aux.add(getMax(this.individuals));
+		}
+		
+		for(Individual i : this.individuals){
+			nextFloat = random.nextFloat();
+			System.out.println(count++ + nextFloat + " VS " + i.getComfort());
+			if(nextFloat <= i.getComfort()){
+				aux.add(i);
+			}
+			else{
+				i = null;
+			}
+		}
+		
+		this.individuals = aux;
+	}
+	
+	//POR UML
+	private Individual getMax(ArrayList<Individual> is){
+		float max_comfort = is.get(0).getComfort();
+		Individual strongest = is.get(0);
+		for(Individual i: is){
+			if(i.getComfort() > max_comfort){
+				max_comfort = i.getComfort();
+				strongest = i;
+			}
+		}
+		is.remove(strongest);
+		return strongest;
 	}
 
 	public int getComfort_param() {
