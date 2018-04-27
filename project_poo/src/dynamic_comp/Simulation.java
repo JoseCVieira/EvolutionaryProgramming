@@ -25,13 +25,15 @@ public class Simulation {
 	
 	void simulateEvent(Event current_event){
 		
-		if(current_event.action() == 'M'){
+		char current_action = current_event.action();
+		
+		if(current_action == 'M'){
 			//new move time for the individual
 			pec.addEvent(new EvMove(current_time + expRandom(move_param*(1-Math.log(current_event.individual.getComfort()))), current_event.individual));
 			Point new_position = getNewIndividualPosition(current_event.individual);
 			current_event.individual.move(new_position);
 		}
-		else if(current_event.action() == 'R'){
+		else if(current_action == 'R'){
 			//new reproduction time for the parent
 			pec.addEvent(new EvReproduction(current_time + expRandom(reprod_param*(1-Math.log(current_event.individual.getComfort()))),current_event.individual));
 			//new child and 3 new events
@@ -40,7 +42,7 @@ public class Simulation {
 			population.addIndividual(i);
 			createNewBornEvents(i);
 		}
-		else if(current_event.action() == 'D'){
+		else if(current_action == 'D'){
 			//eliminates all the events that belong to the individual that died
 			Event e;
 			for(Iterator<Event> i = pec.events.iterator();  i.hasNext(); ){
@@ -51,6 +53,9 @@ public class Simulation {
 			}
 			//puts the individual pointing to null to be collected by gc
 			current_event.individual = null;
+		}
+		else if(current_action == 'E'){
+			
 		}
 		else{
 			System.out.println("Erro. Evento desconhecido");
