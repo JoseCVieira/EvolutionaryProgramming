@@ -56,7 +56,8 @@ public class Population {
 		for(Individual i : individuals)			
 			if(random.nextFloat() <= i.getComfort())
 				aux.add(i);
-		
+			else
+				i = null;
 		individuals = aux;
 	}
 	
