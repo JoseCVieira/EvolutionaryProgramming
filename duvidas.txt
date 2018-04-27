@@ -1,18 +1,12 @@
 -para que serve o n_obsts?
-<<<<<<< HEAD
-=======
--edge abrangida por 2 special zones?
--antes do Evmove temos de verificar o "dist" do indidou: se for 0 (já chegou ao fim) é para apagar todos os eventos dele?
->>>>>>> 3160c24a6329b2d88f852ed6280c86b84025e158
 -UML -> arrayList = array normal?
 
--falta ver todas as visibilitys da população
--falta fazer todas as descrições dos métodos (@param ....)
 -docs??
 -exceções:
     - read file :
         -dataPathUnnexists
         -WrongFormat
     -Outras?
-    
--ter em atenção as diferenças entre o UML e Java nas visibilitys
+
+fazer todas as descrições dos métodos (@param ....)
+-verificar todas (ter em atenção as diferenças entre o UML e Java)
