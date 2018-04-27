@@ -1,5 +1,5 @@
--para que serve o n_obsts?
--UML -> arrayList = array normal?
+-para que serve o n_obsts? Acho que não serve para nada. Para além do mais se os obstáculos tiverem bem inseridos é só buscar o comprimento ao Array
+-UML -> arrayList = array normal? Não array normal define-se de outra forma.
 
 -docs??
 -exceções:
