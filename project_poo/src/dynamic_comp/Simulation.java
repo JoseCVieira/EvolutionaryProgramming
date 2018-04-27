@@ -113,50 +113,6 @@ public class Simulation {
 		pec.addEvent(new EvMove(current_time + expRandom(move_param*(1-Math.log(i.getComfort()))), i));
 	}
 	
-	
-	//UML
-	public Point getNewIndividualPosition(Individual i){
-		
-		int npoints;
-		double rand_double = new Random().nextDouble();
-		ArrayList<Point> obst = grid.getObts();
-		ArrayList<Point> possible_positions = new ArrayList<Point>();
-		ArrayList<Point> aux = new ArrayList<Point>();
-		
-		//get the neighbor points
-		for(int m = -1; m <= 1; m = m + 2){
-			if(m + i.getPosition().getX() < 0 || m + i.getPosition().getX() > grid.getCol() - 1) continue;
-			possible_positions.add(new Point(i.getPosition().getX() + m, i.getPosition().getY()));
-		}
-		
-		for(int n = -1; n <= 1; n = n + 2){
-			if(n + i.getPosition().getY() < 0 || n + i.getPosition().getY() > grid.getRow() - 1) continue;
-			possible_positions.add(new Point(i.getPosition().getX(), i.getPosition().getY() + n));
-		}
-		
-		System.out.println(possible_positions.toString());
-		//eliminate the ones with obstacles
-		for(Point o : obst){
-			for(Point p : possible_positions){
-				if(!o.equals(p)){
-					aux.add(p);
-				}
-			}
-		}
-		System.out.println(aux.toString());
-		possible_positions = aux;
-		
-		//choose a random point to move to
-		npoints = possible_positions.size();
-		for(int index = 0; index < npoints; index++){
-			if(rand_double <= (index + 1)/npoints){
-				return possible_positions.get(index);
-			}
-		}
-		
-		return null;
-	}
-	
 	public static double expRandom(double m) {
 		double next = random.nextDouble();
 		return -m*Math.log(1.0-next);
