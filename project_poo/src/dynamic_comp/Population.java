@@ -21,7 +21,6 @@ public class Population {
 		this.final_pos = final_pos;
 		this.max_pop = max_pop;
 		this.comfort_param = comfort_param;
-		
 		individuals = new ArrayList<Individual>();
 		startPopulating();
 	}
@@ -47,7 +46,6 @@ public class Population {
 	}
 	
 	void epidemic(){
-		int count=0;
 		Random random = new Random();
 		float nextFloat;
 		
@@ -58,7 +56,6 @@ public class Population {
 		
 		for(Individual i : this.individuals){
 			nextFloat = random.nextFloat();
-			System.out.println(count++ + nextFloat + " VS " + i.getComfort());
 			if(nextFloat <= i.getComfort()){
 				aux.add(i);
 			}

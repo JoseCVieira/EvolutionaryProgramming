@@ -1,6 +1,7 @@
 package dynamic_comp;
 
 import java.util.ArrayList;
+
 import static_comp.Edge;
 import static_comp.Path;
 import static_comp.Point;
@@ -14,7 +15,8 @@ public class Individual {
 	private Path path;
 	private float comfort;
 
-	/* Constructors */	
+	/* Constructors */
+	
 	public Individual(Point position, Point final_pos) {
 		this.position = position;
 		this.final_pos = final_pos;

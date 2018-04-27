@@ -100,6 +100,11 @@ public class Grid {
 		return n_obst;
 	}
 	
+	//UML
+	public ArrayList<Point> getObts() {
+		return obts;
+	}
+
 	/* auxiliary methods */
 	private boolean is_specialEdge(Edge edge, Edge sZone) {
 		Point[] edge_p = new Point[2];
