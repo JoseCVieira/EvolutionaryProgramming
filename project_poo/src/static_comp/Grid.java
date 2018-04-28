@@ -5,26 +5,28 @@ import java.util.ArrayList;
 public class Grid {
 	
 	/* Fields */
-	private int n_obst; //para que vai servir isto???
-	private int row;
-	private int col;
+	private int n;
+	private int m;
 	private int cmax;
+	private Point initial_pos;
+	private Point final_pos;
 	private ArrayList<Edge> edges;
 	private ArrayList<Point> obts;
 	private ArrayList<Edge> sZones;
 	
 	/* Constructor */
-	public Grid(int n_obst, int row, int col, ArrayList<Point> obts, ArrayList<Edge> sZones){
-		this.n_obst = n_obst;
-		this.row = row;
-		this.col = col;
+	public Grid(int n, int m, ArrayList<Point> obts, ArrayList<Edge> sZones, Point initial_pos, Point final_pos){
+		this.n = n;
+		this.m = m;
 		this.obts = obts;
 		this.sZones = sZones;
+		this.initial_pos = initial_pos;
+		this.final_pos = final_pos;
 		edges = new ArrayList<Edge>();
 		
 		generateEdges();
-		//insertSpecialEdges();
-		//calculateMaxCost();
+		insertSpecialEdges();
+		calculateMaxCost();
 		insertObst();
 	}
 	
@@ -33,18 +35,18 @@ public class Grid {
 		Point point_1, point_2;
 		Edge edge;
 		
-		for(int i = 1; i <= row; i++) {
-			for(int j = 1; j <= col; j++) {
-				point_1 = new Point(i, j);
+		for(int i = 1; i <= m; i++) {
+			for(int j = 1; j <= n; j++) {
+				point_1 = new Point(j, i);
 				
-				if(j != col) {
-					point_2 = new Point(i, j + 1);
+				if(j != n) {
+					point_2 = new Point(j + 1, i);
 					edge = new Edge(point_1, point_2);
 					edges.add(edge);
 				}
 				
-				if(i != row) {
-					point_2 = new Point(i + 1, j);
+				if(i != m) {
+					point_2 = new Point(j, i + 1);
 					edge = new Edge(point_1, point_2);
 					edges.add(edge);
 				}
@@ -58,7 +60,6 @@ public class Grid {
 				if(is_specialEdge(edge, sZone))
 					if(edge.getCost() < sZone.getCost())
 						edge.setCost(sZone.getCost());
-		
 	}
 	
 	private void calculateMaxCost(){
@@ -88,25 +89,32 @@ public class Grid {
 		return cmax;
 	}
 	
-	public int getRow() {
-		return row;
+	public int getN() {
+		return n;
 	}
 	
-	public int getCol() {
-		return col;
+	public int getM() {
+		return m;
 	}
 	
-	public int getN_obst() {
-		return n_obst;
+	public Point getInitial_pos() {
+		return initial_pos;
+	}
+
+	public Point getFinal_pos() {
+		return final_pos;
 	}
 	
-	//UML
 	public ArrayList<Point> getObts() {
 		return obts;
 	}
-
+	
+	public ArrayList<Edge> getEdges() {
+		return edges;
+	}
+	
 	/* auxiliary methods */
-	private boolean is_specialEdge(Edge edge, Edge sZone) {
+	private boolean is_specialEdge(Edge edge, Edge sZone) { //ver se da para mudar isto
 		Point[] edge_p = new Point[2];
 		Point[] szone_p = new Point[2];
 		
@@ -120,4 +128,5 @@ public class Grid {
 			return true;
 		return false;
 	}
+
 }

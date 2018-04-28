@@ -62,7 +62,7 @@ public class Edge {
 
 	@Override
 	public String toString() {
-		return "Point_1="+getPoints()[0]+"Point_2="+getPoints()[1]+"Cost="+cost+"\n";
+		return "{"+getPoints()[0]+" , ="+getPoints()[1]+"} C="+cost+"\n";
 	}
 
 }

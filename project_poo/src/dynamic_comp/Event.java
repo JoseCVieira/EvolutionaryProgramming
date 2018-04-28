@@ -2,7 +2,7 @@ package dynamic_comp;
 
 public abstract class Event {
 	
-	protected double time;
+	private double time;
 	protected Individual individual;
 	
 	Event(double time, Individual individual){
@@ -11,4 +11,9 @@ public abstract class Event {
 	}
 
 	abstract char action();
+
+	public double getTime() {
+		return time;
+	}
+	
 }

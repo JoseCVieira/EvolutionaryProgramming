@@ -10,23 +10,37 @@ public class Path {
 	
 	/* Constructor */
 	public Path() {
-		edges = new ArrayList<Edge>();
+		setEdges(new ArrayList<Edge>());
 	}
 	
 	/* Methods */
-	public void addEdge(Edge edge){
-		int index = 0;
+	public void addEdge(Point p1, Point p2, int cost){
+		Edge e1 = new Edge(p1, p2, cost);
+		ArrayList<Edge> new_path = new ArrayList<Edge>();
+		boolean repeat = false;
 		
-		for(Edge edge_aux : getEdges()) {
-			if(edge_aux.equals(edge)) {
-				removeEdges(index);
+		this.cost = 0;
+		for(Edge edge : getEdges()) {
+			if(p2.equals(edge.getPoints()[0])) {
+				repeat = true;
 				break;
-			}
-			index++;
+			}else if(p2.equals(edge.getPoints()[1])) {
+				repeat = true;
+				this.cost += edge.getCost();
+				new_path.add(edge);
+				break;
+			}else {
+				this.cost += edge.getCost();
+				new_path.add(edge);
+			}				
+		}
+		setEdges(new_path);
+		
+		if(!repeat) {
+			this.cost += cost;
+			getEdges().add(e1);
 		}
 		
-		cost += edge.getCost();
-		getEdges().add(edge);
 	}
 
 	public int getCost() {
@@ -34,18 +48,26 @@ public class Path {
 	}
 	
 	public int getPathLength() {
-		return edges.size();
+		return getEdges().size();
 	}
 
 	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
 	
-	public void removeEdges(int index) {
-		for(int i = index; i < getEdges().size(); i++) { //da para fazer isto num for each??
-			cost -= getEdges().get(i).getCost();
-			getEdges().remove(i);
+	public void setEdges(ArrayList<Edge> edges) {
+		this.edges = edges;
+	}
+
+	@Override
+	public String toString() {
+		String print = "";
+		
+		for(Edge edge : getEdges()) {
+			print += edge;
 		}
+		
+		return print;
 	}
 	
 }
