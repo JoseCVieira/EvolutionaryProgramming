@@ -16,12 +16,18 @@ public class Simulation {
 	private int init_pop;
 	private int max_pop;
 	private float current_time;
-	private Point initial_pos;
+	private Point initial_pos = new Point(1,1);
 	private Point final_pos;
 	private PEC pec;
 	private Grid grid;
 	private Population population = new Population(init_pop, max_pop, comfort_param, initial_pos, final_pos);
 	
+	Simulation(){
+		ArrayList<Point> obs = new ArrayList<Point>();
+		obs.add(new Point(2,2));
+		obs.add(new Point(3,1));
+		grid = new Grid(2, 5, 5, obs,null);
+	}
 	
 	void simulateEvent(Event current_event){
 		
@@ -74,31 +80,33 @@ public class Simulation {
 		
 		//get the neighbor points
 		for(int m = -1; m <= 1; m = m + 2){
-			if(m + i.getPosition().getX() < 0 || m + i.getPosition().getX() > grid.getCol() - 1) continue;
+			if(m + i.getPosition().getX() < 1 || m + i.getPosition().getX() > grid.getCol()) continue;
 			possible_positions.add(new Point(i.getPosition().getX() + m, i.getPosition().getY()));
 		}
 		
 		for(int n = -1; n <= 1; n = n + 2){
-			if(n + i.getPosition().getY() < 0 || n + i.getPosition().getY() > grid.getRow() - 1) continue;
+			if(n + i.getPosition().getY() < 1 || n + i.getPosition().getY() > grid.getRow()) continue;
 			possible_positions.add(new Point(i.getPosition().getX(), i.getPosition().getY() + n));
 		}
 		
-		System.out.println(possible_positions.toString());
 		//eliminate the ones with obstacles
 		for(Point o : obst){
 			for(Point p : possible_positions){
-				if(!o.equals(p)){
+				if(o.equals(p)){
 					aux.add(p);
 				}
 			}
 		}
-		System.out.println(aux.toString());
-		possible_positions = aux;
+
+		for(Point a : aux){
+			if(possible_positions.remove(a)) continue;
+			break;
+		}
 		
 		//choose a random point to move to
 		npoints = possible_positions.size();
 		for(int index = 0; index < npoints; index++){
-			if(rand_double <= (index + 1)/npoints){
+			if(rand_double <= (double)(index + 1)/npoints){
 				return possible_positions.get(index);
 			}
 		}

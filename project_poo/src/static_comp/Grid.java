@@ -23,8 +23,8 @@ public class Grid {
 		edges = new ArrayList<Edge>();
 		
 		generateEdges();
-		insertSpecialEdges();
-		calculateMaxCost();
+		//insertSpecialEdges();
+		//calculateMaxCost();
 		insertObst();
 	}
 	
