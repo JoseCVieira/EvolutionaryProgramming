@@ -71,8 +71,12 @@ public class Simulation {
 	public void startSimulation() {
 		while(current_time < final_time) {
 			
-			current_event = pec.nextEvent();
-			current_time = current_event.getTime();
+			if(!pec.events.isEmpty()){
+				current_event = pec.nextEvent();
+				if(current_event.getTime() < final_time){
+					current_time = current_event.getTime();
+				}
+				else break;
 			
 			for(int i = 0; i< 30; i++)
 				System.out.println();
@@ -88,6 +92,11 @@ public class Simulation {
 			
 			
 			simulateEvent(current_event);
+			}
+			else{
+				System.out.println("No more events");
+				current_time = final_time;
+			}
 		}
 	}
 	
@@ -130,6 +139,7 @@ public class Simulation {
 					//i.remove();
 				}
 			}
+			System.out.println("DEAD");
 			//puts the individual pointing to null to be collected by gc
 			current_event.individual = null;
 		}
@@ -178,7 +188,7 @@ public class Simulation {
 	}
 	
 	void createNewBornEvents(Individual i){
-		//pec.addEvent(new EvDeath(current_time + expRandom(death_param*(1-Math.log(1-i.getComfort()))), i));
+		pec.addEvent(new EvDeath(current_time + expRandom(death_param*(1-Math.log(1-i.getComfort()))), i));
 		//pec.addEvent(new EvReproduction(current_time + expRandom(reprod_param*(1-Math.log(i.getComfort()))),i));
 		pec.addEvent(new EvMove(current_time + expRandom(move_param*(1-Math.log(i.getComfort()))), i));
 	}
