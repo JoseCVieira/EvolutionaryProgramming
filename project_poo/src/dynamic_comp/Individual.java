@@ -1,6 +1,7 @@
 package dynamic_comp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static_comp.Edge;
 import static_comp.Grid;
@@ -31,31 +32,35 @@ public class Individual {
 	}
 
 	public Individual(Grid grid, int comfort_param, Path path, int length_prefix) {
-		int index = 0;
-		int index_rem;
-		
 		this.comfort_param = comfort_param;
 		this.path = path;
 		this.grid = grid;
-		
-		//ceil() method rounds a number UPWARDS to the nearest integer
-		index_rem = (int) Math.ceil(path.getPathLength() * length_prefix);
-		
+
 		ArrayList<Edge> edges = path.getEdges();
 		
-		for(Edge edge : edges) {
-			if(index++ >= index_rem)
-				edges.remove(edge);
-		}
+		/*System.out.println();
+		System.out.println();
+		System.out.println("length_prefix => " + length_prefix);
+		System.out.println("before =>\n" + edges);*/
+		
+		int index = 1;
+		List<Edge> toRemove = new ArrayList<>(); //utilizar este metdo para remover elementos da lista
+		for (Edge edge : edges)
+			if(index++ > length_prefix) {
+				//System.out.println("removing " + index);
+		        toRemove.add(edge);
+			}
+		edges.removeAll(toRemove);
+		
+		//System.out.println("after =>\n" + edges);
 		
 		path.setEdges(edges);
 		length = path.getPathLength();
 		
-		if(path.getPathLength() != 0) {
-			position = path.getEdges().get(path.getPathLength() - 1).getPoints()[1];
-		}else {
+		if(path.getPathLength() != 0)
+			position = path.getEdges().get(length - 1).getPoints()[1];
+		else
 			position = grid.getInitial_pos();
-		}
 		
 		calculateDist();
 		calculateComfort();

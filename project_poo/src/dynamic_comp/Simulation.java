@@ -23,6 +23,7 @@ public class Simulation {
 	
 	
 	private static Individual ind; //remover isto depois
+	private static int cont = 0;//remover isto depois
 	
 	public Simulation() {
 		int n = 5; //row
@@ -49,7 +50,7 @@ public class Simulation {
 		obsts.add(aux_1);
 		
 		float final_instant = 100;
-		int init_pop = 1;
+		int init_pop = 10;
 		int max_pop = 100;
 		int comfort_param = 3;
 		float death_param = 10;
@@ -78,22 +79,23 @@ public class Simulation {
 				}
 				else break;
 			
-			for(int i = 0; i< 30; i++)
-				System.out.println();
+				for(int i = 0; i< 30; i++)
+					System.out.println();
+				
+				ind = current_event.individual;
+				System.out.println(this);
+				
+				//if(cont++ == 100) {				
+					try{
+					    Thread.sleep(100);
+					}catch(InterruptedException ex){
+					    Thread.currentThread().interrupt();
+					}
+				///}
+				
+				simulateEvent(current_event);
 			
-			ind = current_event.individual;
-			System.out.println(this);
-			
-			try{
-			    Thread.sleep(300);
-			}catch(InterruptedException ex){
-			    Thread.currentThread().interrupt();
-			}
-			
-			
-			simulateEvent(current_event);
-			}
-			else{
+			}else{
 				System.out.println("No more events");
 				current_time = final_time;
 			}
@@ -110,7 +112,7 @@ public class Simulation {
 	}
 	
 	private void simulateEvent(Event current_event){
-		double time;
+		double time, length_prefix;
 		
 		if(current_event.action() == 'M'){ //new move time for the individual
 			time = current_time + expRandom(move_param*(1-Math.log(current_event.individual.getComfort())));
@@ -120,11 +122,15 @@ public class Simulation {
 		}
 		else if(current_event.action() == 'R'){ //new reproduction time for the parent
 			time = current_time + expRandom(reprod_param*(1-Math.log(current_event.individual.getComfort())));
+			length_prefix = current_event.individual.getLength()*0.9 + current_event.individual.getComfort()*0.1;
 					
 			pec.addEvent(new EvReproduction(time, current_event.individual));
 			//new child and 3 new events
+			
+			
+			//ceil() method rounds a number UPWARDS to the nearest integer
 			Individual i = new Individual(current_event.individual.getGrid(), current_event.individual.getComfort_param(),
-			  current_event.individual.getPath(), (int) (current_event.individual.getLength()*0.9 + current_event.individual.getComfort()*0.1));
+			  current_event.individual.getPath(), (int)Math.ceil(length_prefix));
 			
 			population.addIndividual(i);
 			createNewBornEvents(i);
@@ -135,8 +141,8 @@ public class Simulation {
 			for(Iterator<Event> i = pec.events.iterator();  i.hasNext(); ){
 				e = i.next();
 				if(e.individual == current_event.individual){
-					pec.events.remove(e);
-					//i.remove();
+					//pec.events.remove(e);
+					i.remove();
 				}
 			}
 			System.out.println("DEAD");
@@ -189,7 +195,7 @@ public class Simulation {
 	
 	void createNewBornEvents(Individual i){
 		pec.addEvent(new EvDeath(current_time + expRandom(death_param*(1-Math.log(1-i.getComfort()))), i));
-		//pec.addEvent(new EvReproduction(current_time + expRandom(reprod_param*(1-Math.log(i.getComfort()))),i));
+		pec.addEvent(new EvReproduction(current_time + expRandom(reprod_param*(1-Math.log(i.getComfort()))),i));
 		pec.addEvent(new EvMove(current_time + expRandom(move_param*(1-Math.log(i.getComfort()))), i));
 	}
 	
@@ -227,11 +233,13 @@ public class Simulation {
 		
 		for(int i = 1; i <= grid.getM(); i++) { //col
 			for(int j = 1; j <= grid.getN(); j++) { //row
+				
+				String id = String.format("%3d", ind_id);
 
 				if(individual.getPosition().equals(new Point(j, i)))
-					print +="["+ind_id+"]";
+					print +="["+id+"]";
 				else
-					print +="   ";
+					print +="     ";
 
 				obst = false;
 				for(Point p : obsts)
