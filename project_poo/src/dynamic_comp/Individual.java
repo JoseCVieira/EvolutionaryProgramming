@@ -18,7 +18,6 @@ public class Individual {
 	private Point position;
 	private Path path;
 	private Grid grid;
-
 	/* Constructors */
 	public Individual(Grid grid, int comfort_param) {
 		this.position = grid.getInitial_pos();

@@ -7,9 +7,19 @@ public class EvMove extends Event {
 	}
 
 	@Override
-	char action() {
-		if(this.individual == null) return 'E';
-		return 'M';
+	void action(Simulation context) {
+		double new_time;
+		System.out.println("MOVE");
+
+		if(this.individual == null) {
+			
+		}else {
+			new_time = this.time+ context.expRandom(context.getMove_param()*(1-Math.log(this.individual.getComfort())));	
+			context.getPec().addEvent(new EvMove(new_time, this.individual));
+			this.individual.move(context.getNewIndividualPosition(this.individual));
+		}
+	
 	}
+	
 
 }

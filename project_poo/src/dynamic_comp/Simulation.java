@@ -88,8 +88,9 @@ public class Simulation {
 					    Thread.currentThread().interrupt();
 					}
 				///}
-				
-				simulateEvent(current_event);
+				System.out.print(pec.events.size());
+				current_event.action(this);
+				System.out.print(pec.events.size());
 			
 			}else{
 				System.out.println("No more events");
@@ -106,8 +107,8 @@ public class Simulation {
 			createNewBornEvents(i);
 		}
 	}
-	
-	private void simulateEvent(Event current_event){
+	/*@DEPRECATED*/
+	/*private void simulateEvent(Event current_event){
 		double time, length_prefix;
 		
 		if(current_event.action() == 'M'){ //new move time for the individual
@@ -149,9 +150,9 @@ public class Simulation {
 			System.out.println("Erro. Evento desconhecido"); // nao podemos ter prints além dos pedidos
 		}
 		return;
-	}
+	}*/
 	
-	private Point getNewIndividualPosition(Individual i){
+	public Point getNewIndividualPosition(Individual i){
 		int npoints;
 		double rand_double = new Random().nextDouble();
 		ArrayList<Point> obst = grid.getObts();
@@ -189,16 +190,43 @@ public class Simulation {
 		return null;
 	}
 	
-	void createNewBornEvents(Individual i){
+	 void  createNewBornEvents(Individual i){
 		pec.addEvent(new EvDeath(current_time + expRandom(death_param*(1-Math.log(1-i.getComfort()))), i));
 		pec.addEvent(new EvReproduction(current_time + expRandom(reprod_param*(1-Math.log(i.getComfort()))),i));
 		pec.addEvent(new EvMove(current_time + expRandom(move_param*(1-Math.log(i.getComfort()))), i));
+		
 	}
 	
 	public static double expRandom(double m) {
 		double next = random.nextDouble();
 		return -m*Math.log(1.0-next);
 	}
+	
+
+	public float getDeath_param() {
+		return death_param;
+	}
+
+	public float getReprod_param() {
+		return reprod_param;
+	}
+	public Population getPopulation() {
+		return population;
+	}
+	public void setPopulation(Object object) {
+		this.population =(Population) object;
+	}
+	public float getMove_param() {
+		return move_param;
+	}
+	
+	public PEC getPec() {
+		return pec;
+	}
+	public void setPec(Object object) {
+		this.pec =(PEC) object;
+	}
+
 
 	@Override
 	public String toString() {
@@ -226,7 +254,6 @@ public class Simulation {
 		print +="length = " +individual.getLength() +"\n\n";
 		
 		print +="path =\n" + individual.getPath()+"\n\n";
-		
 		for(int i = 1; i <= grid.getM(); i++) { //col
 			for(int j = 1; j <= grid.getN(); j++) { //row
 				
@@ -260,5 +287,7 @@ public class Simulation {
 		
 		return print;
 	}
+
+
 	
 }

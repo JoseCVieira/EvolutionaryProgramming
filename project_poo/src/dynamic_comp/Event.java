@@ -2,7 +2,7 @@ package dynamic_comp;
 
 public abstract class Event {
 	
-	private double time;
+	protected double time;
 	protected Individual individual;
 	
 	Event(double time, Individual individual){
@@ -10,7 +10,7 @@ public abstract class Event {
 		this.individual = individual;
 	}
 
-	abstract char action();
+	abstract void action(Simulation context);
 
 	public double getTime() {
 		return time;
