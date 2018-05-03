@@ -9,7 +9,7 @@ public class EvDeath extends Event{
 	}
 
 	@Override
-	void action(Simulation context) {
+	protected void action(Simulation context) {
 		Event e;
 		//eliminates all the events that belong to the individual that died
 		for(Iterator<Event> i = context.getPec().events.iterator();  i.hasNext(); ){

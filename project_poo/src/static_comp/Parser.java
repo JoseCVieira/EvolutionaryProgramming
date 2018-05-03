@@ -1,4 +1,4 @@
-package main;
+package static_comp;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,6 @@ import java.util.Map;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-import static_comp.*;
 public class Parser extends DefaultHandler{
 
 	private int counter = 0;

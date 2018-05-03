@@ -23,27 +23,16 @@ public class Population {
 	}
 	
 	/* Methods */
-	public void startPopulating(Grid grid, int comfort_param){
+	void startPopulating(Grid grid, int comfort_param){
 		for(int elements = 0; elements < initial_pop; elements++)
 			addIndividual(new Individual(grid, comfort_param));
 	}
 	
 	void addIndividual(Individual individual) {
-		if(checkPopulationLimit())
-			while(checkPopulationLimit())
+		if(individuals.size() >= max_pop)
+			while(individuals.size() >= max_pop)
 				epidemic();
 		individuals.add(individual);
-	}
-	
-	public ArrayList<Individual> getIndividuals() {
-		return individuals;
-	}
-	
-	//Returns true if the population is higher then its limit, false otherwise
-	public boolean checkPopulationLimit(){
-		if(individuals.size() >= max_pop)
-			return true;
-		return false;
 	}
 	
 	private void epidemic(){
@@ -51,7 +40,7 @@ public class Population {
 		Random random = new Random();
 		
 		for(int survivors = 0; survivors < NR_SURVIVORS; survivors++)
-			aux.add(IndMaxComfort());
+			aux.add(getIndMaxComfort());
 		
 		for(Individual i : individuals)			
 			if(random.nextFloat() <= i.getComfort())
@@ -62,7 +51,7 @@ public class Population {
 		individuals = aux;
 	}
 	
-	private Individual IndMaxComfort(){
+	private Individual getIndMaxComfort(){
 		float max_comfort = -1;
 		Individual strongest = null; //vai existir sempre individous logo nunva vai returnar null
 		
@@ -75,6 +64,10 @@ public class Population {
 		
 		individuals.remove(strongest);
 		return strongest;
+	}
+	
+	ArrayList<Individual> getIndividuals() {
+		return individuals;
 	}
 	
 }

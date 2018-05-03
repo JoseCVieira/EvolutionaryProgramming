@@ -3,27 +3,27 @@ package dynamic_comp;
 import java.util.ArrayList;
 import java.util.Random;
 
-import main.Parser;
 import static_comp.Edge;
 import static_comp.Grid;
+import static_comp.Parser;
 import static_comp.Point;
 
 public class Simulation {
 	
-	static Random random = new Random();
-	private float final_time;
-	private float death_param;
-	private float reprod_param;
-	private float move_param;
+	static final int N_OBSERVATIONS = 20;
+	
+	private int final_time;
+	private int death_param;
+	private int reprod_param;
+	private int move_param;
 	private double current_time;
+	private boolean final_hit;
+	private int event_counter;
 	private Population population;
 	private Grid grid;
 	private PEC pec;
 	private Event current_event;
 	private Individual best_individual;
-	private boolean final_hit;
-	private int event_counter;
-	
 	
 	public Simulation(Parser p) {
 		int m = p.getInteger("grid0", 1); //rows
@@ -37,14 +37,12 @@ public class Simulation {
 		for(int i= 0; i < nzones; i++)
 			sZones.add(p.getEdge("zone"+i));
 		
-		
 		int nobsts = p.getInteger("obstacles0", 0);
 		ArrayList<Point> obsts = new ArrayList<Point>();
-		for(int i= 0; i < nobsts; i++) {
+		for(int i= 0; i < nobsts; i++)
 			obsts.add( p.getPoint("obstacle"+i));
-		}
 		
-		this.final_time = (Integer)p.getInteger("simulation0", 0);
+		this.final_time = p.getInteger("simulation0", 0);
 		int init_pop = p.getInteger("simulation0", 1);		
 		int max_pop = p.getInteger("simulation0", 2);
 		int comfort_param = p.getInteger("simulation0", 3);
@@ -56,8 +54,8 @@ public class Simulation {
 		grid = new Grid(n, m, obsts, sZones, initialPoint, finalPoint);
 		pec = new PEC();
 		
-		for(int i = 0; i <= EvObservation.N_OBSERVATIONS; i++)
-			pec.addEvent(new EvObservation(i*getFinal_time()/EvObservation.N_OBSERVATIONS));
+		for(int i = 0; i <= N_OBSERVATIONS; i++)
+			pec.addEvent(new EvObservation(i*getFinal_time()/N_OBSERVATIONS));
 		
 		createPopulation(init_pop, max_pop, comfort_param);
 		
@@ -76,18 +74,9 @@ public class Simulation {
 					break;
 				
 				current_event.action(this);
-				
 				event_counter++;
-				
-				/*for(int j = 0; j< 30; j++)
-					System.out.println();
-				
-				System.out.println(this);*/
-				
-			}else {
-				System.out.println("no more events");
+			}else
 				current_time = getFinal_time();
-			}
 		}
 	}
 	
@@ -99,7 +88,7 @@ public class Simulation {
 			createNewBornEvents(i);
 	}
 	
-	public Point getNewIndividualPosition(Individual i){
+	Point getNewIndividualPosition(Individual i){
 		int npoints;
 		double rand_double = new Random().nextDouble();
 		ArrayList<Point> obst = getGrid().getObts();
@@ -137,120 +126,59 @@ public class Simulation {
 		return null;
 	}
 	
-	 void  createNewBornEvents(Individual i){
-		//pec.addEvent(new EvDeath(current_time + expRandom(death_param*(1-Math.log(1-i.getComfort()))), i));
-		//pec.addEvent(new EvReproduction(current_time + expRandom(reprod_param*(1-Math.log(i.getComfort()))),i));
+	void createNewBornEvents(Individual i){
+		pec.addEvent(new EvDeath(current_time + expRandom(death_param*(1-Math.log(1-i.getComfort()))), i));
+		pec.addEvent(new EvReproduction(current_time + expRandom(reprod_param*(1-Math.log(i.getComfort()))),i));
 		pec.addEvent(new EvMove(current_time + expRandom(move_param*(1-Math.log(i.getComfort()))), i));
 	}
 	
-	public static double expRandom(double m) {
-		double next = random.nextDouble();
-		return -m*Math.log(1.0-next);
+	static double expRandom(double m) {
+		Random random = new Random();
+		return -m*Math.log(1.0-random.nextDouble());
 	}
 	
-
-	public float getDeath_param() {
-		return death_param;
-	}
-
-	public float getReprod_param() {
+	int getReprod_param() {
 		return reprod_param;
 	}
-	
-	public Population getPopulation() {
-		return population;
-	}
-	
-	public void setPopulation(Object object) {
-		this.population =(Population) object;
-	}
-	
-	public float getMove_param() {
+
+	int getMove_param() {
 		return move_param;
 	}
 	
-	public PEC getPec() {
+	Population getPopulation() {
+		return population;
+	}	
+	
+	PEC getPec() {
 		return pec;
 	}
-	public void setPec(Object object) {
-		this.pec =(PEC) object;
-	}
 
-	public Grid getGrid() {
+	Grid getGrid() {
 		return grid;
 	}
 	
-	public boolean isFinal_hit() {
+	boolean isFinal_hit() {
 		return final_hit;
 	}
 
-	public void setFinal_hit(boolean final_hit) {
+	void setFinal_hit(boolean final_hit) {
 		this.final_hit = final_hit;
 	}
 
-	public Individual getBest_individual() {
+	Individual getBest_individual() {
 		return best_individual;
 	}
 
-	public void setBest_individual(Individual best_individual) {
+	void setBest_individual(Individual best_individual) {
 		this.best_individual = best_individual;
 	}
 	
-	public int getEvent_counter() {
+	int getEvent_counter() {
 		return event_counter;
 	}
 	
-	public float getFinal_time() {
+	int getFinal_time() {
 		return final_time;
 	}
-
-	@Override
-	public String toString() {
-		String print = "";
-		boolean obst = false;
-		
-		Individual ind = best_individual;
-		
-		print +="*** Best individual ***\n\n";
-		print +="current time = " +current_time+"\n";
-		print +="position = " +ind.getPosition()+ "\n";
-		print +="cost = " +ind.getPath().getCost()+"\n";
-		print +="comfort = " +ind.getComfort()+ "\n";
-		print +="dist = " +ind.getDist()+ "\n";
-		print +="length = " +ind.getLength() +"\n";
-		print +="final_hit = "+isFinal_hit() +"\n\n";
-		
-		print +="path =\n" + ind.getPath()+"\n\n";
-		for(int i = 1; i <= getGrid().getM(); i++) {
-			for(int j = 1; j <= getGrid().getN(); j++) {
-
-				if(ind.getPosition().equals(new Point(j, i)))
-					print +="[B]";
-				else
-					print +="   ";
-
-				obst = false;
-				for(Point p : getGrid().getObts())
-					if(p.equals(new Point(j, i)))
-						obst = true;
-				
-				if(obst)
-					print +="[O]";
-				else {
-					if(getGrid().getInitial_pos().equals(new Point(j, i)))
-						print +="[I]";
-					else if(getGrid().getFinal_pos().equals(new Point(j, i)))
-						print +="[F]";
-					else
-						print +="   ";
-				}
-				print +=new Point(j, i);
-				print +="   ";
-			}
-			print +="\n\n";
-		}
-		
-		return print;
-	}	
 	
 }

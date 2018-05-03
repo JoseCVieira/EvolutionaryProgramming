@@ -7,7 +7,7 @@ public class EvMove extends Event {
 	}
 
 	@Override
-	void action(Simulation context) {
+	protected void action(Simulation context) {
 		double new_time;
 		
 		new_time = time + Simulation.expRandom(context.getMove_param()*(1-Math.log(individual.getComfort())));			

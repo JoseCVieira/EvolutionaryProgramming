@@ -26,12 +26,12 @@ public class Edge {
 	}
 
 	/* Methods */
+	void setCost(int cost) {
+		this.cost = cost;
+	}
+	
 	public int getCost() {
 		return cost;
-	}
-
-	public void setCost(int cost) {
-		this.cost = cost;
 	}
 
 	public Point[] getPoints() {
@@ -62,7 +62,7 @@ public class Edge {
 
 	@Override
 	public String toString() {
-		return ""+getPoints()[0]/*+","+getPoints()[1]+" C="+cost+",\n"*/;
+		return ""+getPoints()[0];
 	}
 
 }

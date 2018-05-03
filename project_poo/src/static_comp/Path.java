@@ -66,15 +66,12 @@ public class Path {
 
 	@Override
 	public String toString() {
-		
 		String print = "{";
-		
 		for(Edge edge : getEdges()) {
 			print += edge + ",";
 			if(edge.equals(getEdges().get(edges.size() - 1)))
 				print += edge.getPoints()[1];
 		}
-		
 		print += "}";
 		
 		return print;

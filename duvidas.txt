@@ -1,23 +1,21 @@
--para que serve o n_obsts? Acho que não serve para nada. Para além do mais se os obstáculos tiverem bem inseridos é só buscar o comprimento ao Array
--UML -> arrayList = array normal? Não array normal define-se de outra forma.
+duvidas/falta:
+- javadocs
+- exceção WrongFormat??
+- fazer todas as descrições dos métodos (@param ....)
+- ja nao estamos a usar o obst no point... é para mudar??
+- UML - sao assim as constantes?
+- UML - compare triset??
+- verificar as diferenças entre o UML e Java
 
--docs??
--exceções:
-    - read file :
-        -dataPathUnnexists
-        -WrongFormat
-    -Outras?
+testes:
+- dois eventos iguais
+- mais??
 
-fazer todas as descrições dos métodos (@param ....)
--verificar todas (ter em atenção as diferenças entre o UML e Java)
-
-
--TESTAR SPECIAL ZONES - soma de custos(not working)
-
--TESTAR 2 EVENTOS IGUAIS
-
--PENSAR EM MAIS TESTES
-
--DUVIDAS SOBRE REPRODUÇAO PRODUZIR MUITOS EVENTOS
-
--VER FAQS
+Penso que esteja tudo certo, mas é melhor verificar novamente:
+- ver FAQs
+- verificar se o UML e Java tem tudo
+    
+perguntar a stora:
+- print final
+- criar DTD??
+- parametro de reprodução?

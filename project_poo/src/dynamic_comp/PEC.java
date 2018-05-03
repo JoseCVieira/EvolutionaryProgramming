@@ -15,11 +15,11 @@ public class PEC{
 			else return 0;
 		}});
 	
-	public void addEvent(Event event){
+	void addEvent(Event event){
 		events.add(event);
 	}
 	
-	public Event nextEvent(){
+	Event nextEvent(){
 		Event first_event = events.first();
 		events.remove(first_event);
 		return first_event;

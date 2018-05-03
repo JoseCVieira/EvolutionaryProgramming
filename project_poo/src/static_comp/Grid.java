@@ -10,8 +10,8 @@ public class Grid {
 	private int cmax;
 	private Point initial_pos;
 	private Point final_pos;
-	private ArrayList<Edge> edges;
 	private ArrayList<Point> obts;
+	private ArrayList<Edge> edges;
 	private ArrayList<Edge> sZones;
 	
 	/* Constructor */
@@ -27,7 +27,6 @@ public class Grid {
 		generateEdges();
 		create_specialEdges();
 		calculateMaxCost();
-		insertObst();
 		
 		this.sZones = null;
 	}
@@ -62,10 +61,10 @@ public class Grid {
 		Point p1, p2;
 		
 		for(Edge sZone : sZones) {
-		ini_x   = sZone.getPoints()[0].getX();
-		ini_y   = sZone.getPoints()[0].getY();
-		final_x = sZone.getPoints()[1].getX();
-		final_y = sZone.getPoints()[1].getY();
+			ini_x   = sZone.getPoints()[0].getX();
+			ini_y   = sZone.getPoints()[0].getY();
+			final_x = sZone.getPoints()[1].getX();
+			final_y = sZone.getPoints()[1].getY();
 		
 			for(int i = ini_x; i < final_x; i++) {
 				p1 = new Point(i, ini_y);
@@ -74,7 +73,8 @@ public class Grid {
 				
 				for(Edge edge : edges)
 					if(edge.equals(e))
-						edge.setCost(sZone.getCost());
+						if(edge.getCost() < sZone.getCost())
+							edge.setCost(sZone.getCost());
 				
 				p1 = new Point(i, final_y);
 				p2 = new Point(i+1, final_y);
@@ -82,6 +82,7 @@ public class Grid {
 				
 				for(Edge edge : edges)
 					if(edge.equals(e))
+						if(edge.getCost() < sZone.getCost())
 						edge.setCost(sZone.getCost());
 			}
 			
@@ -92,7 +93,8 @@ public class Grid {
 				
 				for(Edge edge : edges)
 					if(edge.equals(e))
-						edge.setCost(sZone.getCost());
+						if(edge.getCost() < sZone.getCost())
+							edge.setCost(sZone.getCost());
 				
 				p1 = new Point(final_x, i);
 				p2 = new Point(final_x, i+1);
@@ -100,7 +102,8 @@ public class Grid {
 				
 				for(Edge edge : edges)
 					if(edge.equals(e))
-						edge.setCost(sZone.getCost());
+						if(edge.getCost() < sZone.getCost())
+							edge.setCost(sZone.getCost());
 			}
 		}
 	}
@@ -110,22 +113,6 @@ public class Grid {
 		for(Edge sZone : sZones)
 			if(sZone.getCost() > cmax)
 				cmax = sZone.getCost();
-	}
-	
-	private void insertObst(){
-		Point[] edge_p = new Point[2];
-		
-		for(Point point : obts) {
-			for(Edge edge : edges) {
-				edge_p = edge.getPoints();
-				
-				if(edge_p[0].equals(point))
-					edge_p[0].setObst(true);
-				else if(edge_p[1].equals(point))
-					edge_p[1].setObst(true);
-				
-			}
-		}
 	}
 	
 	public int getCmax() {
@@ -155,4 +142,5 @@ public class Grid {
 	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
+	
 }

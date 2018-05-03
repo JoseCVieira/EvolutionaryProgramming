@@ -7,11 +7,12 @@ public class EvReproduction extends Event {
 	}
 
 	@Override
-	void action(Simulation context) {
+	protected void action(Simulation context) {
 		double new_time;
 		double length_prefix;
 		
 		new_time = time + Simulation.expRandom(context.getReprod_param()*(1-Math.log(individual.getComfort())));
+		
 		context.getPec().addEvent(new EvReproduction(new_time, individual));
 		
 		//new child and 3 new events

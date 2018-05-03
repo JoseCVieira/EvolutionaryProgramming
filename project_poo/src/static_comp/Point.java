@@ -5,13 +5,11 @@ public class Point {
 	/* Fields */
 	private int x;
 	private int y;
-	private boolean obst;
 	
 	/* Constructor */
 	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
-		obst = false; //default
 	}
 
 	/* Methods */
@@ -21,14 +19,6 @@ public class Point {
 
 	public int getY() {
 		return y;
-	}
-
-	public boolean isObst() {
-		return obst;
-	}
-
-	public void setObst(boolean obst) {
-		this.obst = obst;
 	}
 	
 	@Override

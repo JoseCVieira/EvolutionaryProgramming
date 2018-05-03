@@ -19,7 +19,7 @@ public class Individual {
 	private Grid grid;
 	
 	/* Constructors */
-	public Individual(Grid grid, int comfort_param) {
+	Individual(Grid grid, int comfort_param) {
 		this.position = grid.getInitial_pos();
 		this.comfort_param = comfort_param;
 		this.grid = grid;
@@ -29,7 +29,7 @@ public class Individual {
 		calculateComfort();
 	}
 
-	public Individual(Grid grid, Path path, int length_prefix, int comfort_param) {
+	Individual(Grid grid, Path path, int length_prefix, int comfort_param) {
 		this.path = new Path();
 		this.grid = grid;
 		this.comfort_param = comfort_param;
@@ -74,7 +74,7 @@ public class Individual {
 		comfort = (float)(aux_1 * aux_2);
 	}
 	
-	public void move(Point new_position) {
+	void move(Point new_position) {
 		Edge edge_1 = new Edge(position, new_position);
 		Edge edge_2 = new Edge(new_position, position);
 		
@@ -96,31 +96,31 @@ public class Individual {
 		calculateComfort();
 	}
 
-	public Point getPosition() {
+	Point getPosition() {
 		return position;
 	}
 	
-	public int getDist() {
+	int getDist() {
 		return dist;
 	}
 	
-	public int getLength() {
+	int getLength() {
 		return length;
 	}
 	
-	public Path getPath() {
+	Path getPath() {
 		return path;
 	}
-
-	public float getComfort() {
+	
+	float getComfort() {
 		return comfort;
 	}
-
-	public Grid getGrid() {
+	
+	Grid getGrid() {
 		return grid;
 	}
-
-	public int getComfort_param() {
+	
+	int getComfort_param() {
 		return comfort_param;
 	}
 	

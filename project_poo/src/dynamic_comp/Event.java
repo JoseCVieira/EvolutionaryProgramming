@@ -10,9 +10,9 @@ public abstract class Event {
 		this.individual = individual;
 	}
 
-	abstract void action(Simulation context);
+	protected abstract void action(Simulation context);
 
-	public double getTime() {
+	protected final double getTime() {
 		return time;
 	}
 	

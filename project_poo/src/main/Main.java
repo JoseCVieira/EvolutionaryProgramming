@@ -10,19 +10,21 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.helpers.DefaultHandler;
 
 import dynamic_comp.Simulation;
+import static_comp.Parser;
 
 public class Main {
 
 	public static void main(String[] args){
-		Simulation simulation = null;
+		Simulation simulation;
+		Parser parser;
 		SAXParserFactory fact = SAXParserFactory.newInstance();
 		
 		try {
 			SAXParser saxParser = fact.newSAXParser();
 			DefaultHandler handler = new Parser();
 			saxParser.parse(new File(args[0]), handler); 
-			Parser p = ((Parser) handler);
-			simulation = new Simulation(p);
+			parser = ((Parser) handler);
+			simulation = new Simulation(parser);
 			simulation.startSimulation();
 		} catch (ParserConfigurationException e) {
 			System.out.println(e.getMessage());

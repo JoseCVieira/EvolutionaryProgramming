@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<simulation finalinst="200" initpop="10" maxpop="500" comfortsens="3">
+<simulation finalinst="100" initpop="10" maxpop="500" comfortsens="3">
    <grid colsnb="5" rowsnb="4"/>
    <initialpoint xinitial="1" yinitial="1"/>
    <finalpoint xfinal="5" yfinal="4"/>
-   <specialcostzones num="1">
+   <specialcostzones num="2">
       <zone xinitial="2" yinitial="2" xfinal="4" yfinal="4">4</zone>
+      <zone xinitial="3" yinitial="2" xfinal="4" yfinal="3">2</zone>
    </specialcostzones>
    <obstacles num="4">
       <obstacle xpos="2" ypos="1"/>
