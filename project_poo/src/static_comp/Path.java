@@ -15,32 +15,32 @@ public class Path {
 	
 	/* Methods */
 	public void addEdge(Point p1, Point p2, int cost){
-		Edge e1 = new Edge(p1, p2, cost);
-		ArrayList<Edge> new_path = new ArrayList<Edge>();
-		boolean repeat = false;
+		Edge e1 = new Edge(p1, p2, cost); //repeating edge
+		Edge e2 = new Edge(p2, p1, cost); //coming back
+		
+		boolean repeating = false;
 		
 		this.cost = 0;
-		for(Edge edge : getEdges()) {
-			if(p2.equals(edge.getPoints()[0])) {
-				repeat = true;
-				break;
-			}else if(p2.equals(edge.getPoints()[1])) {
-				repeat = true;
-				this.cost += edge.getCost();
-				new_path.add(edge);
-				break;
-			}else {
-				this.cost += edge.getCost();
-				new_path.add(edge);
-			}				
-		}
-		setEdges(new_path);
+		ArrayList<Edge> new_path = new ArrayList<Edge>();
 		
-		if(!repeat) {
+		for(Edge edge : edges) {
+			if(e1.equals(edge))
+				break;
+			else if(e2.equals(edge)) {
+				repeating = true;
+				break;
+			}
+			
+			new_path.add(edge);
+			this.cost += edge.getCost();
+		}
+		
+		if(!repeating) {
+			new_path.add(e1);
 			this.cost += cost;
-			getEdges().add(e1);
 		}
 		
+		setEdges(new_path);
 	}
 
 	public int getCost() {
@@ -48,7 +48,7 @@ public class Path {
 	}
 	
 	public int getPathLength() {
-		return getEdges().size();
+		return edges.size();
 	}
 
 	public ArrayList<Edge> getEdges() {
@@ -57,15 +57,25 @@ public class Path {
 	
 	public void setEdges(ArrayList<Edge> edges) {
 		this.edges = edges;
+		cost = 0;
+		
+		for(Edge e : edges) {
+			cost += e.getCost();
+		}
 	}
 
 	@Override
 	public String toString() {
-		String print = "";
+		
+		String print = "{";
 		
 		for(Edge edge : getEdges()) {
-			print += edge;
+			print += edge + ",";
+			if(edge.equals(getEdges().get(edges.size() - 1)))
+				print += edge.getPoints()[1];
 		}
+		
+		print += "}";
 		
 		return print;
 	}

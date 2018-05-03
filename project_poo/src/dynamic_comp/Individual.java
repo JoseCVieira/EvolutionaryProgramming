@@ -1,7 +1,6 @@
 package dynamic_comp;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static_comp.Edge;
 import static_comp.Grid;
@@ -18,45 +17,34 @@ public class Individual {
 	private Point position;
 	private Path path;
 	private Grid grid;
+	
 	/* Constructors */
 	public Individual(Grid grid, int comfort_param) {
 		this.position = grid.getInitial_pos();
 		this.comfort_param = comfort_param;
 		this.grid = grid;
 		
-		comfort = (float) 0.1;
-		
-		calculateDist();
 		path = new Path();
+		calculateDist();
+		calculateComfort();
 	}
 
-	public Individual(Grid grid, int comfort_param, Path path, int length_prefix) {
-		this.comfort_param = comfort_param;
-		this.path = path;
+	public Individual(Grid grid, Path path, int length_prefix, int comfort_param) {
+		this.path = new Path();
 		this.grid = grid;
-
-		ArrayList<Edge> edges = path.getEdges();
+		this.comfort_param = comfort_param;
 		
-		/*System.out.println();
-		System.out.println();
-		System.out.println("length_prefix => " + length_prefix);
-		System.out.println("before =>\n" + edges);*/
+		ArrayList<Edge> edges = new ArrayList<Edge>();
 		
-		int index = 1;
-		List<Edge> toRemove = new ArrayList<>(); //utilizar este metdo para remover elementos da lista
-		for (Edge edge : edges)
-			if(index++ > length_prefix) {
-				//System.out.println("removing " + index);
-		        toRemove.add(edge);
-			}
-		edges.removeAll(toRemove);
+		if(length_prefix > path.getPathLength())
+			edges = path.getEdges();
+		else
+			edges = new ArrayList<Edge> (path.getEdges().subList(0, length_prefix));
 		
-		//System.out.println("after =>\n" + edges);
-		
-		path.setEdges(edges);
+		this.path.setEdges(edges);
 		length = path.getPathLength();
 		
-		if(path.getPathLength() != 0)
+		if(length != 0)
 			position = path.getEdges().get(length - 1).getPoints()[1];
 		else
 			position = grid.getInitial_pos();
@@ -90,13 +78,19 @@ public class Individual {
 		Edge edge_1 = new Edge(position, new_position);
 		Edge edge_2 = new Edge(new_position, position);
 		
-		for(Edge edge : grid.getEdges())
+		for(Edge edge : grid.getEdges()) {
 			if(edge_1.equals(edge) || edge_2.equals(edge)) {
 				path.addEdge(position, new_position, edge.getCost());
 				break;
 			}
+		}
 		
-		position = new_position;
+		//position = new_position;
+		if(path.getPathLength() != 0)
+			position = path.getEdges().get(path.getPathLength() - 1).getPoints()[1];
+		else
+			position = grid.getInitial_pos();
+			
 		length = path.getPathLength();
 		calculateDist();
 		calculateComfort();

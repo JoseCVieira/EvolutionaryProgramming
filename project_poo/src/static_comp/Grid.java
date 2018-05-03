@@ -25,9 +25,11 @@ public class Grid {
 		edges = new ArrayList<Edge>();
 		
 		generateEdges();
-		insertSpecialEdges();
+		create_specialEdges();
 		calculateMaxCost();
 		insertObst();
+		
+		this.sZones = null;
 	}
 	
 	/* Methods */
@@ -54,12 +56,53 @@ public class Grid {
 		}
 	}
 	
-	private void insertSpecialEdges(){
-		for(Edge edge : edges)
-			for(Edge sZone : sZones)
-				if(is_specialEdge(edge, sZone))
-					if(edge.getCost() < sZone.getCost())
+	private void create_specialEdges() {
+		int ini_x, ini_y, final_x, final_y;
+		Edge e;
+		Point p1, p2;
+		
+		for(Edge sZone : sZones) {
+		ini_x   = sZone.getPoints()[0].getX();
+		ini_y   = sZone.getPoints()[0].getY();
+		final_x = sZone.getPoints()[1].getX();
+		final_y = sZone.getPoints()[1].getY();
+		
+			for(int i = ini_x; i < final_x; i++) {
+				p1 = new Point(i, ini_y);
+				p2 = new Point(i+1, ini_y);
+				e = new Edge(p1, p2);
+				
+				for(Edge edge : edges)
+					if(edge.equals(e))
 						edge.setCost(sZone.getCost());
+				
+				p1 = new Point(i, final_y);
+				p2 = new Point(i+1, final_y);
+				e = new Edge(p1, p2);
+				
+				for(Edge edge : edges)
+					if(edge.equals(e))
+						edge.setCost(sZone.getCost());
+			}
+			
+			for(int i = ini_y; i < final_y; i++) {
+				p1 = new Point(ini_x, i);
+				p2 = new Point(ini_x, i+1);
+				e = new Edge(p1, p2);
+				
+				for(Edge edge : edges)
+					if(edge.equals(e))
+						edge.setCost(sZone.getCost());
+				
+				p1 = new Point(final_x, i);
+				p2 = new Point(final_x, i+1);
+				e = new Edge(p1, p2);
+				
+				for(Edge edge : edges)
+					if(edge.equals(e))
+						edge.setCost(sZone.getCost());
+			}
+		}
 	}
 	
 	private void calculateMaxCost(){
@@ -112,21 +155,4 @@ public class Grid {
 	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
-	
-	/* auxiliary methods */
-	private boolean is_specialEdge(Edge edge, Edge sZone) { //ver se da para mudar isto
-		Point[] edge_p = new Point[2];
-		Point[] szone_p = new Point[2];
-		
-		edge_p = edge.getPoints();
-		szone_p = sZone.getPoints();
-		
-		if(edge_p[0].getX() >= szone_p[0].getX() && edge_p[0].getX() <= szone_p[1].getX() &&
-		   edge_p[1].getX() >= szone_p[0].getX() && edge_p[1].getX() <= szone_p[1].getX() &&
-		   edge_p[0].getY() >= szone_p[0].getY() && edge_p[0].getY() <= szone_p[1].getY() &&
-		   edge_p[1].getY() >= szone_p[0].getY() && edge_p[1].getY() <= szone_p[1].getY())
-			return true;
-		return false;
-	}
-
 }

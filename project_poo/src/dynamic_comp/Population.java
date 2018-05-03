@@ -46,12 +46,12 @@ public class Population {
 		return false;
 	}
 	
-	void epidemic(){
+	private void epidemic(){
 		ArrayList<Individual> aux = new ArrayList<Individual>();
 		Random random = new Random();
 		
 		for(int survivors = 0; survivors < NR_SURVIVORS; survivors++)
-			aux.add(getIndMaxComfort());
+			aux.add(IndMaxComfort());
 		
 		for(Individual i : individuals)			
 			if(random.nextFloat() <= i.getComfort())
@@ -62,8 +62,7 @@ public class Population {
 		individuals = aux;
 	}
 	
-	//POR UML
-	private Individual getIndMaxComfort(){
+	private Individual IndMaxComfort(){
 		float max_comfort = -1;
 		Individual strongest = null; //vai existir sempre individous logo nunva vai returnar null
 		
