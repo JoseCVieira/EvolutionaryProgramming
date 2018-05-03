@@ -10,3 +10,14 @@
 
 fazer todas as descrições dos métodos (@param ....)
 -verificar todas (ter em atenção as diferenças entre o UML e Java)
+
+
+-TESTAR SPECIAL ZONES - soma de custos(not working)
+
+-TESTAR 2 EVENTOS IGUAIS
+
+-PENSAR EM MAIS TESTES
+
+-DUVIDAS SOBRE REPRODUÇAO PRODUZIR MUITOS EVENTOS
+
+-VER FAQS
