@@ -13,7 +13,7 @@ public class EvObservation extends Event{
 	void action(Simulation context) {
 		number = (int)(time*N_OBSERVATIONS/context.getFinalTime());
 		
-		System.out.println("Observation "+number);
+		System.out.println("Observation "+number+":");
 		System.out.println("\t\t Present Instant:\t\t\t"+time);
 		System.out.println("\t\t Number Of Realized Events:\t\t"+context.getEventCounter());
 		System.out.println("\t\t Population Size:\t\t\t"+context.getPopulation().getIndividuals().size());
