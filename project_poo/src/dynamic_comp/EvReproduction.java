@@ -8,9 +8,9 @@ public class EvReproduction extends Event {
 
 	@Override
 	void action(Simulation context) {
-			double new_time;
-			double length_prefix;
-			System.out.println("REPRO");
+		double new_time;
+		double length_prefix;
+			//System.out.println(time);
 		if(this.individual == null){
 			
 		}else {
@@ -22,10 +22,10 @@ public class EvReproduction extends Event {
 			
 			
 			//ceil() method rounds a number UPWARDS to the nearest integer
-			System.out.println("PARENT PATH: "+ this.individual.getPath());
+			//System.out.println("PARENT PATH: "+ this.individual.getPath());
 			Individual i = new Individual(this.individual.getGrid(), this.individual.getComfort_param(),
 			  this.individual.getPath(), (int)Math.ceil(length_prefix));
-			System.out.println("NEW PATH: "+ i.getPath());
+			//System.out.println("NEW PATH: "+ i.getPath());
 			 context.getPopulation().addIndividual(i);
 			context.createNewBornEvents(i);
 

@@ -15,7 +15,7 @@ public class Parser extends DefaultHandler{
 	
 	private int counter = 0;
 	private static String tag;
-	
+		
 	private static String fileName ="";
 	private Map<String, Integer[]> inputs = new HashMap<String, Integer[]>();
 	public Parser(String filename) {
@@ -28,6 +28,7 @@ public class Parser extends DefaultHandler{
 	public void endDocument(){
 		System.out.println("Ending the parsing of"+ fileName);
 	}
+	
 	public void startElement(String uri, String name, String tag, Attributes atts){
 		String key = "";
 		if(this.tag == tag)
@@ -74,10 +75,23 @@ public class Parser extends DefaultHandler{
 		}
 		return o;
 	}
+	public Point getPoint(String tag) {
+		return new Point(inputs.get(tag)[0], inputs.get(tag)[1]);
+	}
+	public Edge getEdge(String tag) {
+		try {
+			int cost =inputs.get(tag+"cost")[0];
+			return new Edge(new Point(inputs.get(tag)[0], 
+					inputs.get(tag)[1]), new Point(inputs.get(tag)[2], inputs.get(tag)[3]), cost);
+			}catch(NullPointerException e) {
+				return new Edge(new Point(inputs.get(tag)[0], 
+						inputs.get(tag)[1]), new Point(inputs.get(tag)[2], inputs.get(tag)[3]));
+			}
+	}
+	public Integer getInteger(String tag, int i) {
+		return inputs.get(tag)[i];
+	}
 
-
-
-	
 
 
 

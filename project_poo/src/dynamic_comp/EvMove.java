@@ -9,8 +9,7 @@ public class EvMove extends Event {
 	@Override
 	void action(Simulation context) {
 		double new_time;
-		System.out.println("MOVE");
-
+		//System.out.println(time);
 		if(this.individual == null) {
 			
 		}else {

@@ -21,47 +21,51 @@ public class Simulation {
 	private Grid grid;
 	private PEC pec;
 	private Event current_event;
-	
-	
+	private Individual best_individual;
+	private boolean final_hit;
+	private int event_counter;
 	private static Individual ind; //remover isto depois
 	private static int cont = 0;//remover isto depois
 	private Point defaultPoint  = new Point(0,0);
 	private Edge defaultEdge = new Edge(defaultPoint,defaultPoint);
 	public Simulation(Parser p) {
-		int n = 5; //row
-		int m = 4; //col
+		int m = p.getInteger("grid0", 1); //rows
+		int n = p.getInteger("grid0", 0); //cols
 		
 		
-		Point initialPoint = (Point) p.getValue("initialpoint0", defaultPoint);
-		Point finalPoint = (Point) p.getValue("finalpoint0", defaultPoint);
-		int nzones = (Integer) p.getValue("specialcostzones0", 0);
+		Point initialPoint = p.getPoint("initialpoint0");//updatePoint()
+		Point finalPoint = p.getPoint("finalpoint0");
+		int nzones = p.getInteger("specialcostzones0", 0);
 		ArrayList<Edge> sZones = new ArrayList<Edge>();
 		
 		for(int i= 0; i < nzones; i++) {
-			sZones.add((Edge) p.getValue("zone"+i, defaultEdge));
+			sZones.add(p.getEdge("zone"+i));
 		}
 		
 		
-		int nobsts = (Integer)p.getValue("obstacles0", 0);
+		int nobsts = p.getInteger("obstacles0", 0);
 		ArrayList<Point> obsts = new ArrayList<Point>();
 		for(int i= 0; i < nobsts; i++) {
-			obsts.add((Point) p.getValue("obstacle"+i, defaultPoint));
+			obsts.add( p.getPoint("obstacle"+i));
 		}
 		
 		
-		this.final_time = (Integer)p.getValue("simulation0", 0);
-		int init_pop = (Integer)p.getValue("simulation0", 1);		
-		int max_pop = (Integer)p.getValue("simulation0", 2);
-		int comfort_param = (Integer)p.getValue("simulation0", 3);
-		this.death_param = (Integer)p.getValue("death0", 0);
-		this.move_param =(Integer)p.getValue("reproduction0", 0);
-		this.reprod_param = (Integer)p.getValue("move0", 0);
+		this.final_time = (Integer)p.getInteger("simulation0", 0);
+		int init_pop = p.getInteger("simulation0", 1);		
+		int max_pop = p.getInteger("simulation0", 2);
+		int comfort_param = p.getInteger("simulation0", 3);
+		this.death_param = p.getInteger("death0", 0);
+		this.move_param =p.getInteger("reproduction0", 0);
+		this.reprod_param = p.getInteger("move0", 0);
 		
 		
 		Grid grid = new Grid(n, m, obsts, sZones, initialPoint, finalPoint);
 		this.grid = grid;
 		pec = new PEC();
-		
+		for(int i = 0; i < EvObservation.N_OBSERVATIONS; i++) {
+			pec.addEvent(new EvObservation(i*final_time/EvObservation.N_OBSERVATIONS));
+			System.out.println(i*final_time/EvObservation.N_OBSERVATIONS);
+		}
 		createPopulation(init_pop, max_pop, comfort_param);
 	}
 	
@@ -75,22 +79,22 @@ public class Simulation {
 				}
 				else break;
 			
-				for(int i = 0; i< 30; i++)
-					System.out.println();
+				/*for(int i = 0; i< 30; i++)
+					System.out.println();*/
 				
 				ind = current_event.individual;
-				System.out.println(this);
+				//System.out.println(this);
 				
 				//if(cont++ == 100) {				
-					try{
+					/*try{
 					    Thread.sleep(100);
 					}catch(InterruptedException ex){
 					    Thread.currentThread().interrupt();
-					}
+					}*/
 				///}
-				System.out.print(pec.events.size());
+				//System.out.print(pec.events.size());
 				current_event.action(this);
-				System.out.print(pec.events.size());
+				//System.out.print(pec.events.size());
 			
 			}else{
 				System.out.println("No more events");
@@ -107,50 +111,6 @@ public class Simulation {
 			createNewBornEvents(i);
 		}
 	}
-	/*@DEPRECATED*/
-	/*private void simulateEvent(Event current_event){
-		double time, length_prefix;
-		
-		if(current_event.action() == 'M'){ //new move time for the individual
-			time = current_time + expRandom(move_param*(1-Math.log(current_event.individual.getComfort())));
-			
-			pec.addEvent(new EvMove(time, current_event.individual));
-			current_event.individual.move(getNewIndividualPosition(current_event.individual));
-		}
-		else if(current_event.action() == 'R'){ //new reproduction time for the parent
-			time = current_time + expRandom(reprod_param*(1-Math.log(current_event.individual.getComfort())));
-			length_prefix = current_event.individual.getLength()*0.9 + current_event.individual.getComfort()*0.1;
-					
-			pec.addEvent(new EvReproduction(time, current_event.individual));
-			//new child and 3 new events
-			
-			
-			//ceil() method rounds a number UPWARDS to the nearest integer
-			Individual i = new Individual(current_event.individual.getGrid(), current_event.individual.getComfort_param(),
-			  current_event.individual.getPath(), (int)Math.ceil(length_prefix));
-			
-			population.addIndividual(i);
-			createNewBornEvents(i);
-		}
-		else if(current_event.action() == 'D'){
-			//eliminates all the events that belong to the individual that died
-			Event e;
-			for(Iterator<Event> i = pec.events.iterator();  i.hasNext(); ){
-				e = i.next();
-				if(e.individual == current_event.individual){
-					//pec.events.remove(e);
-					i.remove();
-				}
-			}
-			System.out.println("DEAD");
-			//puts the individual pointing to null to be collected by gc
-			current_event.individual = null;
-		}
-		else{
-			System.out.println("Erro. Evento desconhecido"); // nao podemos ter prints além dos pedidos
-		}
-		return;
-	}*/
 	
 	public Point getNewIndividualPosition(Individual i){
 		int npoints;
@@ -197,12 +157,23 @@ public class Simulation {
 		
 	}
 	
+	public Individual getBestIndividual() {
+		return best_individual;
+	}
+	public boolean getFinalHit() {
+		return final_hit;
+	}
+	public int getEventCounter() {
+		return event_counter;
+	}
 	public static double expRandom(double m) {
 		double next = random.nextDouble();
 		return -m*Math.log(1.0-next);
 	}
 	
-
+	public float getFinalTime() {
+		return this.final_time;
+	}
 	public float getDeath_param() {
 		return death_param;
 	}
@@ -213,9 +184,7 @@ public class Simulation {
 	public Population getPopulation() {
 		return population;
 	}
-	public void setPopulation(Object object) {
-		this.population =(Population) object;
-	}
+	
 	public float getMove_param() {
 		return move_param;
 	}

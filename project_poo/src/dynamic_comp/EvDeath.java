@@ -10,7 +10,7 @@ public class EvDeath extends Event{
 
 	@Override
 	void action(Simulation context) {
-		System.out.println("DEATH");
+		//System.out.println(time);
 		//context.getPec().addEvent(event);
 		if(this.individual == null) {
 			
@@ -24,7 +24,7 @@ public class EvDeath extends Event{
 					i.remove();
 				}
 			}
-			System.out.println("DEAD");
+			//System.out.println("DEAD");
 			//puts the individual pointing to null to be collected by gc
 			this.individual = null;
 			
