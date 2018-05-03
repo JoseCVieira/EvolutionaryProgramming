@@ -13,7 +13,9 @@ public class EvMove extends Event {
 		if(this.individual == null) {
 			
 		}else {
-			new_time = this.time+ context.expRandom(context.getMove_param()*(1-Math.log(this.individual.getComfort())));	
+			
+			new_time = this.time+ Simulation.expRandom(context.getMove_param()*(1-Math.log(this.individual.getComfort())));	
+			//System.out.println("[MOVE]\t time: "+time+" new_time: "+new_time);
 			context.getPec().addEvent(new EvMove(new_time, this.individual));
 			this.individual.move(context.getNewIndividualPosition(this.individual));
 		}

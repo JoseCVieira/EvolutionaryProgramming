@@ -62,7 +62,7 @@ public class Simulation {
 		Grid grid = new Grid(n, m, obsts, sZones, initialPoint, finalPoint);
 		this.grid = grid;
 		pec = new PEC();
-		for(int i = 0; i < EvObservation.N_OBSERVATIONS; i++) {
+		for(int i = 0; i <= EvObservation.N_OBSERVATIONS; i++) {
 			pec.addEvent(new EvObservation(i*final_time/EvObservation.N_OBSERVATIONS));
 			System.out.println(i*final_time/EvObservation.N_OBSERVATIONS);
 		}
@@ -70,11 +70,11 @@ public class Simulation {
 	}
 	
 	public void startSimulation() {
-		while(current_time < final_time) {
+		while(current_time <= final_time) {
 			
 			if(!pec.events.isEmpty()){
 				current_event = pec.nextEvent();
-				if(current_event.getTime() < final_time){
+				if(current_event.getTime() <= final_time){
 					current_time = current_event.getTime();
 				}
 				else break;
@@ -94,6 +94,7 @@ public class Simulation {
 				///}
 				//System.out.print(pec.events.size());
 				current_event.action(this);
+				this.event_counter++;
 				//System.out.print(pec.events.size());
 			
 			}else{

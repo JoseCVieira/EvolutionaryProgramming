@@ -15,6 +15,7 @@ public class EvReproduction extends Event {
 			
 		}else {
 			new_time = time + Simulation.expRandom(context.getReprod_param()*(1-Math.log(this.individual.getComfort())));
+			//System.out.println("[REPRO]\t time: "+time+" new_time: "+new_time);
 			length_prefix = this.individual.getLength()*0.9 + this.individual.getComfort()*0.1;
 					
 			context.getPec().addEvent(new EvReproduction(new_time, this.individual));
@@ -26,7 +27,7 @@ public class EvReproduction extends Event {
 			Individual i = new Individual(this.individual.getGrid(), this.individual.getComfort_param(),
 			  this.individual.getPath(), (int)Math.ceil(length_prefix));
 			//System.out.println("NEW PATH: "+ i.getPath());
-			 context.getPopulation().addIndividual(i);
+			context.getPopulation().addIndividual(i);
 			context.createNewBornEvents(i);
 
 		}

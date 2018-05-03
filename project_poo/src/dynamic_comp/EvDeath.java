@@ -16,6 +16,7 @@ public class EvDeath extends Event{
 			
 		}else {
 			Event e;
+			//System.out.println("[DEAD]\t time: "+time);//+" new_time: "+new_time);
 			//eliminates all the events that belong to the individual that died
 			for(Iterator<Event> i = context.getPec().events.iterator();  i.hasNext(); ){
 				e = i.next();
