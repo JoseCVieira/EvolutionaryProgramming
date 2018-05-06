@@ -13,7 +13,10 @@ import dynamic_comp.Simulation;
 import static_comp.Parser;
 
 public class Main {
-
+	/**
+	 * Main expects only one argument which is the file to parse
+	 * @param args
+	 */
 	public static void main(String[] args){
 		Simulation simulation;
 		Parser parser;

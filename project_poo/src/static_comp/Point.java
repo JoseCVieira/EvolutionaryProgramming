@@ -6,17 +6,22 @@ public class Point {
 	private int x;
 	private int y;
 	
-	/* Constructor */
+	/**
+	 * Constructs class and initializes its attributes
+	 * @param x
+	 * @param y
+	 */
 	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
 	/* Methods */
+	/*Getter for attribute X*/
 	public int getX() {
 		return x;
 	}
-
+	/*Getter for attribute Y*/
 	public int getY() {
 		return y;
 	}
@@ -29,7 +34,7 @@ public class Point {
 		result = prime * result + y;
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

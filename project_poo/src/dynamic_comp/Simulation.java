@@ -25,6 +25,10 @@ public class Simulation {
 	private Event current_event;
 	private Individual best_individual;
 	
+	/**
+	 * Constructs simulation by using the data parsed by the given object Parser
+	 * @param p
+	 */
 	public Simulation(Parser p) {
 		int m = p.getInteger("grid0", 1); //rows
 		int n = p.getInteger("grid0", 0); //cols
@@ -62,7 +66,9 @@ public class Simulation {
 		setBest_individual(new Individual(grid, comfort_param));
 		final_hit = false;
 	}
-	
+	/**
+	 * Makes simulation to read each event one by one and making it actuate
+	 */
 	public void startSimulation() {
 		while(current_time <= getFinal_time()) {
 			if(!pec.events.isEmpty()){
@@ -72,14 +78,20 @@ public class Simulation {
 					current_time = current_event.getTime();
 				else
 					break;
-				
+				/*Event Action*/
 				current_event.action(this);
 				event_counter++;
 			}else
 				current_time = getFinal_time();
 		}
 	}
-	
+	/**
+	 * Creates the population by giving the initial population, max population and a given comfort parameter
+	 * 
+	 * @param init_pop
+	 * @param max_pop
+	 * @param comfort_param
+	 */
 	private void createPopulation(int init_pop, int max_pop, int comfort_param) {
 		population = new Population(init_pop, max_pop);
 		population.startPopulating(getGrid(), comfort_param);
@@ -87,7 +99,11 @@ public class Simulation {
 		for(Individual i : population.getIndividuals())
 			createNewBornEvents(i);
 	}
-	
+	/**
+	 * 
+	 * @param i
+	 * @return
+	 */
 	Point getNewIndividualPosition(Individual i){
 		int npoints;
 		double rand_double = new Random().nextDouble();
@@ -125,13 +141,20 @@ public class Simulation {
 		
 		return null;
 	}
-	
+	/**
+	 * Creates 3 different types of events for a given individual
+	 * @param i
+	 */
 	void createNewBornEvents(Individual i){
 		pec.addEvent(new EvDeath(current_time + expRandom(death_param*(1-Math.log(1-i.getComfort()))), i));
 		pec.addEvent(new EvReproduction(current_time + expRandom(reprod_param*(1-Math.log(i.getComfort()))),i));
 		pec.addEvent(new EvMove(current_time + expRandom(move_param*(1-Math.log(i.getComfort()))), i));
 	}
-	
+	/**
+	 * Used to calculate an exponential Random value given a mean value m
+	 * @param m
+	 * @return double
+	 */
 	static double expRandom(double m) {
 		Random random = new Random();
 		return -m*Math.log(1.0-random.nextDouble());

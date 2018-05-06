@@ -8,12 +8,19 @@ public class Path {
 	private int cost;
 	private ArrayList<Edge> edges;
 	
-	/* Constructor */
+	/**
+	 * 
+	 */
 	public Path() {
 		setEdges(new ArrayList<Edge>());
 	}
 	
-	/* Methods */
+	/**
+	 * 
+	 * @param p1
+	 * @param p2
+	 * @param cost
+	 */
 	public void addEdge(Point p1, Point p2, int cost){
 		Edge e1 = new Edge(p1, p2, cost); //repeating edge
 		Edge e2 = new Edge(p2, p1, cost); //coming back
@@ -42,19 +49,31 @@ public class Path {
 		
 		setEdges(new_path);
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public int getCost() {
 		return cost;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getPathLength() {
 		return edges.size();
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
-	
+	/**
+	 * 
+	 * @param edges
+	 */
 	public void setEdges(ArrayList<Edge> edges) {
 		this.edges = edges;
 		cost = 0;

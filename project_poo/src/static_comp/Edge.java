@@ -8,7 +8,12 @@ public class Edge {
 	private int cost;
 	private Point[] points;
 	
-	/* Constructor */
+	/**
+	 * Constructs Edge object and initializes its points
+	 * and assigning a default cost of 1
+	 * @param p1
+	 * @param p2
+	 */
 	public Edge(Point p1, Point p2) {
 		points = new Point[2];
 		
@@ -16,7 +21,13 @@ public class Edge {
 		getPoints()[1] = p2;
 		cost = 1; //default
 	}
-	
+	/**
+	 * Constructs Edge object and initializes its points
+	 * and assigning a given cost
+	 * @param p1
+	 * @param p2
+	 * @param cost
+	 */
 	public Edge(Point p1, Point p2, int cost) {
 		points = new Point[2];
 		

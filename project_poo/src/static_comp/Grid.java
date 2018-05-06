@@ -14,7 +14,17 @@ public class Grid {
 	private ArrayList<Edge> edges;
 	private ArrayList<Edge> sZones;
 	
-	/* Constructor */
+	/**
+	 * Constructs Grid Edges according to its size and
+	 * inserts special zones, obstacles and final/initial point
+	 * 
+	 * @param n
+	 * @param m
+	 * @param obts
+	 * @param sZones
+	 * @param initial_pos
+	 * @param final_pos
+	 */
 	public Grid(int n, int m, ArrayList<Point> obts, ArrayList<Edge> sZones, Point initial_pos, Point final_pos){
 		this.n = n;
 		this.m = m;
@@ -31,7 +41,9 @@ public class Grid {
 		this.sZones = null;
 	}
 	
-	/* Methods */
+	/**
+	 * Generates edges according to a given m and n attributes
+	 */
 	private void generateEdges(){
 		Point point_1, point_2;
 		Edge edge;
@@ -54,7 +66,9 @@ public class Grid {
 			}
 		}
 	}
-	
+	/**
+	 * Creates edges belonging to a special zone
+	 */
 	private void create_specialEdges() {
 		int ini_x, ini_y, final_x, final_y;
 		Edge e;
@@ -107,7 +121,9 @@ public class Grid {
 			}
 		}
 	}
-	
+	/**
+	 * Finds max cost in the grid by searching in sZones List
+	 */
 	private void calculateMaxCost(){
 		cmax = -1;
 		for(Edge sZone : sZones)
