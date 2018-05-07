@@ -1,11 +1,36 @@
 package dynamic_comp;
 
+/**
+ * 
+ * An EvObservation is a subclass of Event that has no individual associated 
+ * and is responsible for printing an observation. The time is immutable.
+ * 
+ *
+ */
+
 public class EvObservation extends Event{
 	
+	/**
+	 * Constructs and initializes an EvObservation with a specific time and individual
+	 * 
+	 * @param time
+	 * time at which the event occurs
+	 * @param individual
+	 * the individual that it is assigned to
+	 * 
+	 */
 	EvObservation(double time){
 		super(time, null);
 	}
 
+	/**
+	 * Prints the value of the observation number, present instant, the number of events realized,
+	 * the population size and if the final point has been hit or not. All of these properties are
+	 * related to the Simulation object, context.
+	 * 
+	 * @param context
+	 * 
+	 */
 	@Override
 	protected void action(Simulation context) {
 		int number = (int)(time*Simulation.N_OBSERVATIONS/context.getFinal_time());
