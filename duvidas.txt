@@ -1,20 +1,12 @@
 duvidas/falta:
-- javadocs
-- exceção WrongFormat??
-- fazer todas as descrições dos métodos (@param ....)
-- ja nao estamos a usar o obst no point... é para mudar??
 - UML - sao assim as constantes?
-- UML - compare triset??
-- verificar as diferenças entre o UML e Java
-- criar os testes (XML) (5 testes)
-
+- inserir print final 
 testes:
-- dois eventos iguais (falta se forem do mesmo individuo mas de tipo diferente)
-- mais??
+- criar os testes (XML) (5 testes)
+-gerar jar
 
-Penso que esteja tudo certo, mas é melhor verificar novamente:
+falta:
 - ver FAQs
 - verificar se o UML e Java tem tudo
     
-perguntar a stora:
-- print final
+
