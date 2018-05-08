@@ -47,7 +47,7 @@ public class EvObservation extends Event{
 			System.out.println("no");
 	
 		System.out.println("\t\t Path of the best fit individual:\t"+context.getBest_individual().getPath());
-		System.out.println("\t\t Cost/Comfort:\t\t\t"+context.getBest_individual().getPath().getCost()+"/"+context.getBest_individual().getComfort());
+		System.out.println("\t\t Cost/Comfort:\t\t\t\t"+ context.getBest_individual().getPath().getCost()+"/"+ String.format("%.4f",context.getBest_individual().getComfort()));
 	}
 	
 }

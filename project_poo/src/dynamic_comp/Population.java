@@ -42,6 +42,10 @@ public class Population {
 	 * 
 	 * @param comfort_param
 	 * The parameter of the Individual's comfort.
+	 * 
+	 * @param context
+	 * A Simulation Object
+	 * 
 	 */
 	void startPopulating(Grid grid, int comfort_param, Simulation context){
 		for(int elements = 0; elements < initial_pop; elements++)
@@ -54,6 +58,10 @@ public class Population {
 	 * Otherwise it calls the epidemic method.
 	 * 
 	 * @param individual
+	 * 
+	 * @param context
+	 * A Simulation Object
+	 * 
 	 */
 	
 	void addIndividual(Individual individual, Simulation context) {
@@ -67,6 +75,10 @@ public class Population {
 	 * When we reach the maximum population, the NR_SURVIVORS(that is defined as 5) individuals with more comfort
 	 * instantly survive. The rest of the individuals live if the comfort is lower than a random number.
 	 * Otherwise they die (individual is put to null).
+	 * 
+	 * @param context
+	 * A Simulation Object
+	 * 
 	 */
 	private void epidemic(Simulation context){
 		LinkedList<Individual> aux = new LinkedList<Individual>();
@@ -120,7 +132,7 @@ public class Population {
 	 * 
 	 * Gets all the elements of the population
 	 * 
-	 * @return ArrayList<Individual>
+	 * @return LinkedList<Individual>
 	 */
 	LinkedList<Individual> getIndividuals() {
 		return individuals;

@@ -38,9 +38,7 @@ public class EvReproduction extends Event {
 		double length_prefix;
 				
 		new_time = time + Simulation.expRandom(context.getReprod_param()*(1-Math.log(individual.getComfort())));
-		
-		//System.out.println("Reprodução" + new_time);
-		
+			
 		context.getPec().addEvent(new EvReproduction(new_time, individual));
 		
 		length_prefix = individual.getLength()*0.9 + individual.getComfort();
