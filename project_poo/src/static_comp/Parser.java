@@ -85,4 +85,5 @@ public class Parser extends DefaultHandler{
 	public Integer getInteger(String tag, int i) {
 		return inputs.get(tag)[i];
 	}
+	
 }

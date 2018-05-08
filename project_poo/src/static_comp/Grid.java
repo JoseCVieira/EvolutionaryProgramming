@@ -103,7 +103,7 @@ public class Grid {
 				for(Edge edge : edges)
 					if(edge.equals(e))
 						if(edge.getCost() < sZone.getCost())
-						edge.setCost(sZone.getCost());
+							edge.setCost(sZone.getCost());
 			}
 			
 			for(int i = ini_y; i < final_y; i++) {

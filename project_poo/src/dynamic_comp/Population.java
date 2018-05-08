@@ -98,7 +98,6 @@ public class Population {
 			
 		}	
 		individuals = aux;
-
 	}
 	
 	/**
@@ -109,7 +108,7 @@ public class Population {
 	 */
 	private Individual getIndMaxComfort(){
 		float max_comfort = -1;
-		Individual strongest = null; //vai existir sempre individous logo nunva vai returnar null
+		Individual strongest = new Individual();
 		
 		for(Individual individual: individuals){
 			if(individual.getComfort() > max_comfort){

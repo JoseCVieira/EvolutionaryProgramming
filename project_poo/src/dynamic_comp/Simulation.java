@@ -111,11 +111,15 @@ public class Simulation {
 	}
 	
 	/**
+	 * Finds next position that will be attributed to the individual. First it will generate all possible points without
+	 * take into account if they are an obstacle or not. Next step is verify is some of them are obstacles. If it is an obstacle,
+	 * then it is removed from the possible positions. At the end, dividing by the number of possibilities its used a random value to
+	 * decide what's the next position.
+	 * 
 	 * @param i
 	 * @return
 	 */
 	Point getNewIndividualPosition(Individual i){
-		int npoints;
 		double rand_double = new Random().nextDouble();
 		ArrayList<Point> obst = getGrid().getObts();
 		ArrayList<Point> possible_positions = new ArrayList<Point>();
@@ -144,11 +148,13 @@ public class Simulation {
 		}
 		
 		//choose a random point to move to
-		npoints = possible_positions.size();
-		for(int index = 0; index < npoints; index++)
+		int npoints = possible_positions.size();
+		int index = 0;
+		for(Point p : possible_positions) {
 			if(rand_double <= (double)(index + 1)/npoints)
-				return possible_positions.get(index);
-		
+				return p;
+			index++;
+		}		
 		return null;
 	}
 	
@@ -178,55 +184,49 @@ public class Simulation {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return returns reproduction parameter
 	 */
 	int getReprod_param() {
 		return reprod_param;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * @return returns move parameter
 	 */
 	int getMove_param() {
 		return move_param;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return returns population
 	 */
 	Population getPopulation() {
 		return population;
 	}	
 	
 	/**
-	 * 
-	 * @return
+	 * @return returns pec
 	 */
 	PEC getPec() {
 		return pec;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * @return returns grid
 	 */
 	Grid getGrid() {
 		return grid;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return final hit
 	 */
 	boolean isFinal_hit() {
 		return final_hit;
 	}
 
 	/**
-	 * 
+	 * set final hit. True when some individual reach the final position
 	 * @param final_hit
 	 */
 	void setFinal_hit(boolean final_hit) {
@@ -234,15 +234,16 @@ public class Simulation {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * @return returns the best individual
 	 */
 	Individual getBest_individual() {
 		return best_individual;
 	}
 
 	/**
-	 * 
+	 * set the best individual that is the individual with the best comfort in case of none of the individuals
+	 * reach the final position or the individual that has the lower cost path in case of at least one of them reach the final
+	 * position
 	 * @param best_individual
 	 */
 	void setBest_individual(Individual best_individual) {
@@ -250,16 +251,14 @@ public class Simulation {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return returns event counter
 	 */
 	int getEvent_counter() {
 		return event_counter;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return returns final instant
 	 */
 	int getFinal_time() {
 		return final_time;
