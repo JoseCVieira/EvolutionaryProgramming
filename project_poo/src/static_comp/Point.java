@@ -1,5 +1,9 @@
 package static_comp;
 
+/**
+ * Point is composed of an x and y and it is used to represent a position of the grid
+ */
+
 public class Point {
 	
 	/* Fields */
@@ -17,11 +21,16 @@ public class Point {
 	}
 
 	/* Methods */
-	/*Getter for attribute X*/
+	/**
+	 * @return returns the fild X
+	 */
 	public int getX() {
 		return x;
 	}
-	/*Getter for attribute Y*/
+	
+	/**
+	 * @return returns the fild Y
+	 */
 	public int getY() {
 		return y;
 	}
@@ -51,6 +60,9 @@ public class Point {
 		return true;
 	}
 
+	/**
+	 * textual description of this class
+	 */
 	@Override
 	public String toString() {
 		return "("+x+","+y+")";

@@ -2,6 +2,12 @@ package static_comp;
 
 import java.util.Arrays;
 
+/**
+ * Edge is a class used to represent a connection between two points, where it has a cost that is 1 by default.
+ * This class is used, for instance, to represent every connection in the grid and every move made by an individual (path)
+ * It is also used to represent a special zone once it was the needed fields.
+ */
+
 public class Edge {
 
 	/* Fields */
@@ -11,8 +17,8 @@ public class Edge {
 	/**
 	 * Constructs Edge object and initializes its points
 	 * and assigning a default cost of 1
-	 * @param p1
-	 * @param p2
+	 * @param p1 first point of the edge
+	 * @param p2 second point of the edge
 	 */
 	public Edge(Point p1, Point p2) {
 		points = new Point[2];
@@ -21,12 +27,13 @@ public class Edge {
 		getPoints()[1] = p2;
 		cost = 1; //default
 	}
+	
 	/**
 	 * Constructs Edge object and initializes its points
 	 * and assigning a given cost
-	 * @param p1
-	 * @param p2
-	 * @param cost
+	 * @param p1 first point of the edge
+	 * @param p2 second point of the edge
+	 * @param cost non default cost
 	 */
 	public Edge(Point p1, Point p2, int cost) {
 		points = new Point[2];
@@ -37,14 +44,24 @@ public class Edge {
 	}
 
 	/* Methods */
+	
+	/**
+	 * @param cost the cost to set
+	 */
 	void setCost(int cost) {
 		this.cost = cost;
 	}
 	
+	/**
+	 * @return returns the cost associated with the edge 
+	 */
 	public int getCost() {
 		return cost;
 	}
 
+	/**
+	 * @return returns the two points associated with the edge 
+	 */
 	public Point[] getPoints() {
 		return points;
 	}
@@ -71,6 +88,9 @@ public class Edge {
 		return true;
 	}
 
+	/**
+	 * textual description of this class
+	 */
 	@Override
 	public String toString() {
 		return ""+getPoints()[0];

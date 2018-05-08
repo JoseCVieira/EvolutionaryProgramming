@@ -7,8 +7,6 @@ import java.util.TreeSet;
 /**
  * PEC - Pending Event Container saves all the events associated to the simulation.
  * In this way, the PEC contains an Event TreeSet that introduces events based on their time.
- * 
- *
  */
 
 public class PEC{
@@ -34,7 +32,6 @@ public class PEC{
 	}
 	
 	/**
-	 * 
 	 * Returns the first Event in the SortetSet and eliminates it from the Set.
 	 * 
 	 * @return Event

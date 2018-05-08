@@ -3,10 +3,8 @@ package dynamic_comp;
 import java.util.Iterator;
 
 /**
- * 
  * An EvDeath is a subclass of Event that is responsible to make the individual die. 
  * The time and individual are immutable once they are defined.
- *
  */
 
 public class EvDeath extends Event{
@@ -18,7 +16,6 @@ public class EvDeath extends Event{
 	 * time at which the event occurs
 	 * @param individual
 	 * the individual that it is assigned to
-	 * 
 	 */
 	EvDeath(double time, Individual individual){
 		super(time, individual);
@@ -30,7 +27,6 @@ public class EvDeath extends Event{
 	 * 
 	 * @param context
 	 * Simulation where all the individuals and the events are
-	 * 
 	 */
 	@Override
 	protected void action(Simulation context) {

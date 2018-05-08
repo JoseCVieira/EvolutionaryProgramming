@@ -4,12 +4,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
-import static_comp.Grid;
-
 /**
  * Population represents a set of the class Individuals that has an initial and a maximum number of individuals.
  * These variables are immutable.
- *
  */
 
 public class Population {
@@ -45,11 +42,10 @@ public class Population {
 	 * 
 	 * @param context
 	 * A Simulation Object
-	 * 
 	 */
-	void startPopulating(Grid grid, int comfort_param, Simulation context){
+	void startPopulating(Simulation context){
 		for(int elements = 0; elements < initial_pop; elements++)
-			addIndividual(new Individual(grid, comfort_param), context);
+			addIndividual(new Individual(), context);
 	}
 	
 	
@@ -61,7 +57,6 @@ public class Population {
 	 * 
 	 * @param context
 	 * A Simulation Object
-	 * 
 	 */
 	
 	void addIndividual(Individual individual, Simulation context) {
@@ -78,7 +73,6 @@ public class Population {
 	 * 
 	 * @param context
 	 * A Simulation Object
-	 * 
 	 */
 	private void epidemic(Simulation context){
 		LinkedList<Individual> aux = new LinkedList<Individual>();
@@ -129,7 +123,6 @@ public class Population {
 	}
 	
 	/**
-	 * 
 	 * Gets all the elements of the population
 	 * 
 	 * @return LinkedList<Individual>

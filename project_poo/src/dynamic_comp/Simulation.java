@@ -8,6 +8,10 @@ import static_comp.Grid;
 import static_comp.Parser;
 import static_comp.Point;
 
+/**
+ * Simulation is the class that make the interconnection between the static structure and the dynamic components
+ */
+
 public class Simulation {
 	
 	static final int N_OBSERVATIONS = 20;
@@ -54,18 +58,21 @@ public class Simulation {
 		this.move_param =p.getInteger("reproduction0", 0);
 		this.reprod_param = p.getInteger("move0", 0);
 		
-		
 		grid = new Grid(n, m, obsts, sZones, initialPoint, finalPoint);
 		pec = new PEC();
+		
+		Individual.grid = grid;
+		Individual.comfort_param = comfort_param;
 		
 		for(int i = 0; i <= N_OBSERVATIONS; i++)
 			pec.addEvent(new EvObservation((double)i*getFinal_time()/N_OBSERVATIONS));
 		
-		createPopulation(init_pop, max_pop, comfort_param);
+		createPopulation(init_pop, max_pop);
 		
-		setBest_individual(new Individual(grid, comfort_param));
+		setBest_individual(new Individual());
 		final_hit = false;
 	}
+	
 	/**
 	 * Makes simulation to read each event one by one and making it actuate
 	 */
@@ -84,7 +91,10 @@ public class Simulation {
 			}else
 				current_time = getFinal_time();
 		}
+		
+		System.out.println("\n\n\tPath of the best fit individual:\t"+best_individual.getPath());
 	}
+	
 	/**
 	 * Creates the population by giving the initial population, max population and a given comfort parameter
 	 * 
@@ -92,15 +102,15 @@ public class Simulation {
 	 * @param max_pop
 	 * @param comfort_param
 	 */
-	private void createPopulation(int init_pop, int max_pop, int comfort_param) {
+	private void createPopulation(int init_pop, int max_pop) {
 		population = new Population(init_pop, max_pop);
-		population.startPopulating(getGrid(), comfort_param, this);
+		population.startPopulating(this);
 		
 		for(Individual i : population.getIndividuals())
 			createNewBornEvents(i);
 	}
+	
 	/**
-	 * 
 	 * @param i
 	 * @return
 	 */
@@ -141,25 +151,22 @@ public class Simulation {
 		
 		return null;
 	}
+	
 	/**
 	 * Creates 3 different types of events for a given individual
 	 * @param i
 	 */
 	void createNewBornEvents(Individual i){
-		
 		double time = current_time + expRandom(death_param*(1-Math.log(1-i.getComfort())));
-		//System.out.println("Morte" + time);
 		pec.addEvent(new EvDeath(time, i));
 		
 		time = current_time + expRandom(reprod_param*(1-Math.log(i.getComfort())));
-		//System.out.println("Reprodução" + time);
-
 		pec.addEvent(new EvReproduction(time,i));
 		
 		time = current_time + expRandom(reprod_param*(1-Math.log(i.getComfort())));
-		//System.out.println("Mover" + time);
 		pec.addEvent(new EvMove(time, i));
 	}
+	
 	/**
 	 * Used to calculate an exponential Random value given a mean value m
 	 * @param m
@@ -170,46 +177,90 @@ public class Simulation {
 		return -m*Math.log(1.0-random.nextDouble());
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	int getReprod_param() {
 		return reprod_param;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	int getMove_param() {
 		return move_param;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	Population getPopulation() {
 		return population;
 	}	
 	
+	/**
+	 * 
+	 * @return
+	 */
 	PEC getPec() {
 		return pec;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	Grid getGrid() {
 		return grid;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isFinal_hit() {
 		return final_hit;
 	}
 
+	/**
+	 * 
+	 * @param final_hit
+	 */
 	void setFinal_hit(boolean final_hit) {
 		this.final_hit = final_hit;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	Individual getBest_individual() {
 		return best_individual;
 	}
 
+	/**
+	 * 
+	 * @param best_individual
+	 */
 	void setBest_individual(Individual best_individual) {
 		this.best_individual = best_individual;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	int getEvent_counter() {
 		return event_counter;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	int getFinal_time() {
 		return final_time;
 	}

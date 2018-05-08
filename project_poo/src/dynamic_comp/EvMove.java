@@ -1,11 +1,8 @@
 package dynamic_comp;
 
 /**
- * 
  * An EvMove is a subclass of Event that is responsible to make the individual move. 
  * The time and individual are immutable once they are defined.
- * 
- *
  */
 
 public class EvMove extends Event {
@@ -17,7 +14,6 @@ public class EvMove extends Event {
 	 * time at which the event occurs
 	 * @param individual
 	 * the individual that it is assigned to
-	 * 
 	 */
 	EvMove(double time, Individual individual) {
 		super(time, individual);
@@ -32,16 +28,12 @@ public class EvMove extends Event {
 	 * 
 	 * @param context
 	 * Simulation where all the individuals and the events are
-	 * 
 	 */
-	
 	@Override
 	protected void action(Simulation context) {
 		double new_time;
 		
 		new_time = time + Simulation.expRandom(context.getMove_param()*(1-Math.log(individual.getComfort())));			
-		
-		//System.out.println("Mover" + new_time);
 		
 		context.getPec().addEvent(new EvMove(new_time, individual));
 		individual.move(context.getNewIndividualPosition(individual));
@@ -50,24 +42,19 @@ public class EvMove extends Event {
 			if(individual.getPosition().equals(context.getGrid().getFinal_pos())) {
 				context.setFinal_hit(true);
 				
-				Individual i = new Individual(individual.getGrid(), individual.getPath(),
-						individual.getPath().getPathLength(), individual.getComfort_param());
+				Individual i = new Individual(individual.getPath(), individual.getPath().getPathLength());
 				context.setBest_individual(i);
 				
 			}else if(individual.getComfort() > context.getBest_individual().getComfort()) {
 				
-				Individual i = new Individual(individual.getGrid(), individual.getPath(),
-						individual.getPath().getPathLength(), individual.getComfort_param());
+				Individual i = new Individual(individual.getPath(), individual.getPath().getPathLength());
 				context.setBest_individual(i);
 			}
-		}
-		
-		else if(context.isFinal_hit()) {
+		} else {
 			if(individual.getPosition().equals(context.getGrid().getFinal_pos())) {				
 				if(individual.getPath().getCost() < context.getBest_individual().getPath().getCost()) {
 					
-					Individual i = new Individual(individual.getGrid(), individual.getPath(),
-							individual.getPath().getPathLength(), individual.getComfort_param());
+					Individual i = new Individual(individual.getPath(),	individual.getPath().getPathLength());
 					context.setBest_individual(i);
 				}
 			}

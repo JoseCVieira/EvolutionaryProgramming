@@ -1,11 +1,8 @@
 package dynamic_comp;
 
 /**
- * 
  * An EvObservation is a subclass of Event that has no individual associated 
  * and is responsible for printing an observation. The time is immutable.
- * 
- *
  */
 
 public class EvObservation extends Event{
@@ -17,7 +14,6 @@ public class EvObservation extends Event{
 	 * time at which the event occurs
 	 * @param individual
 	 * the individual that it is assigned to
-	 * 
 	 */
 	EvObservation(double time){
 		super(time, null);
@@ -29,7 +25,6 @@ public class EvObservation extends Event{
 	 * related to the Simulation object, context.
 	 * 
 	 * @param context
-	 * 
 	 */
 	@Override
 	protected void action(Simulation context) {

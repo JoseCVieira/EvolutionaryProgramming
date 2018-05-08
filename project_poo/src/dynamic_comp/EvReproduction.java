@@ -1,11 +1,8 @@
 package dynamic_comp;
 
 /**
- * 
  * An EvReproduction is a subclass of Event that is responsible for creating a new Individual
  * The time and individual are immutable once they are defined.
- * 
- *
  */
 
 public class EvReproduction extends Event {
@@ -17,7 +14,6 @@ public class EvReproduction extends Event {
 	 * time at which the event occurs
 	 * @param individual
 	 * the individual that it is assigned to
-	 * 
 	 */
 	EvReproduction(double time, Individual individual){
 		super(time, individual);
@@ -25,7 +21,6 @@ public class EvReproduction extends Event {
 
 	
 	/**
-	 * 
 	 * Creates a new reproduction event for the specific individual and creates a new child,
 	 * based on the parent's path and comfort, with 3 new events(Move, Death, Reproduction)
 	 * 
@@ -42,11 +37,15 @@ public class EvReproduction extends Event {
 		context.getPec().addEvent(new EvReproduction(new_time, individual));
 		
 		length_prefix = individual.getLength()*0.9 + individual.getComfort();
-		Individual i = new Individual(individual.getGrid(), individual.getPath(),
-				(int)Math.ceil(length_prefix), individual.getComfort_param());
+		Individual i = new Individual(individual.getPath(), (int)Math.ceil(length_prefix));
 		
 		context.getPopulation().addIndividual(i, context);
 		context.createNewBornEvents(i);
+		
+		if(!context.isFinal_hit())
+			if(individual.getComfort() > context.getBest_individual().getComfort())
+				context.setBest_individual(i);
+		
 	}
 
 }

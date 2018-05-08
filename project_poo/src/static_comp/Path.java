@@ -2,6 +2,11 @@ package static_comp;
 
 import java.util.ArrayList;
 
+/**
+ * Path is a Class that holds a array list of type Edge that represents the path that the individual
+ * went through. This Path also has a cost associated (sum of the costs of all edges in the path)
+ */
+
 public class Path {
 
 	/* Fields */
@@ -9,13 +14,18 @@ public class Path {
 	private ArrayList<Edge> edges;
 	
 	/**
-	 * 
+	 * always create a new array list empty of type Edge
 	 */
 	public Path() {
 		setEdges(new ArrayList<Edge>());
 	}
 	
 	/**
+	 * this method allows adding an edge to the individual's path. When it is called, it will create the possible two ways to move,
+	 * represented by e1 and e2. Then, each edge already in the array list, will be compared with the 2 edges just created.
+	 * If it is equals to e1, it means that the individual is repeating the edge, so it is not added.
+	 * If it is equals to e2, it means that the individual is repeating the edge, but in the reverse way, so the edge is
+	 * removed and so the cost.
 	 * 
 	 * @param p1
 	 * @param p2
@@ -49,30 +59,30 @@ public class Path {
 		
 		setEdges(new_path);
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * @return path's cost
 	 */
 	public int getCost() {
 		return cost;
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * @return path's length
 	 */
 	public int getPathLength() {
 		return edges.size();
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * @return path's edges
 	 */
 	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
+	
 	/**
-	 * 
-	 * @param edges
+	 * @return set all edges of the path
 	 */
 	public void setEdges(ArrayList<Edge> edges) {
 		this.edges = edges;
@@ -83,6 +93,9 @@ public class Path {
 		}
 	}
 
+	/**
+	 * textual description of this class
+	 */
 	@Override
 	public String toString() {
 		String print = "{";

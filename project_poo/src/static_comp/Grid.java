@@ -2,6 +2,11 @@ package static_comp;
 
 import java.util.ArrayList;
 
+/**
+ * Grid is a Class that holds the fields needed by the whole Simulation
+ * Their fields are set based on the XML file and they will not be changed during the simulation
+ */
+
 public class Grid {
 
 	/* Fields */
@@ -18,12 +23,12 @@ public class Grid {
 	 * Constructs Grid Edges according to its size and
 	 * inserts special zones, obstacles and final/initial point
 	 * 
-	 * @param n
-	 * @param m
-	 * @param obts
-	 * @param sZones
-	 * @param initial_pos
-	 * @param final_pos
+	 * @param n width of the grid
+	 * @param m height of the grid
+	 * @param obts array list of Point that are obstacles
+	 * @param sZones array list of Edge are zones with a special cost
+	 * @param initial_pos initial position where the initial individuals are set
+	 * @param final_pos final position where the individuals want to reach
 	 */
 	public Grid(int n, int m, ArrayList<Point> obts, ArrayList<Edge> sZones, Point initial_pos, Point final_pos){
 		this.n = n;
@@ -66,6 +71,7 @@ public class Grid {
 			}
 		}
 	}
+	
 	/**
 	 * Creates edges belonging to a special zone
 	 */
@@ -121,6 +127,7 @@ public class Grid {
 			}
 		}
 	}
+	
 	/**
 	 * Finds max cost in the grid by searching in sZones List
 	 */
@@ -131,30 +138,51 @@ public class Grid {
 				cmax = sZone.getCost();
 	}
 	
+	/**
+	 * @return returns the max cost in the grid
+	 */
 	public int getCmax() {
 		return cmax;
 	}
 	
+	/**
+	 * @return returns the width of the grid
+	 */
 	public int getN() {
 		return n;
 	}
 	
+	/**
+	 * @return height of the grid
+	 */
 	public int getM() {
 		return m;
 	}
 	
+	/**
+	 * @return the initial position
+	 */
 	public Point getInitial_pos() {
 		return initial_pos;
 	}
 
+	/**
+	 * @return the final position
+	 */
 	public Point getFinal_pos() {
 		return final_pos;
 	}
 	
+	/**
+	 * @return all points that are obstacles
+	 */
 	public ArrayList<Point> getObts() {
 		return obts;
 	}
 	
+	/**
+	 * @return all edges of the grid
+	 */
 	public ArrayList<Edge> getEdges() {
 		return edges;
 	}

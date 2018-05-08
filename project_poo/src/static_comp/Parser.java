@@ -6,6 +6,11 @@ import java.util.Map;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
+/**
+ * 
+ * 
+ *
+ */
 public class Parser extends DefaultHandler{
 
 	private int counter = 0;
@@ -30,6 +35,7 @@ public class Parser extends DefaultHandler{
 		}
 		inputs.put(key, array);
 	}
+	
 	/**
 	 * 
 	 */
@@ -43,6 +49,7 @@ public class Parser extends DefaultHandler{
 			}
 		} 
 	}
+	
 	/**
 	 * Gets a Point object parsed from the xml document according to its tag
 	 * @param tag
@@ -51,6 +58,7 @@ public class Parser extends DefaultHandler{
 	public Point getPoint(String tag) {
 		return new Point(inputs.get(tag)[0], inputs.get(tag)[1]);
 	}
+	
 	/**
 	 * Gets an Edge object parsed from the xml document according to its tag
 	 * @param tag
