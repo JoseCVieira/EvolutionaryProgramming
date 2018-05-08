@@ -41,6 +41,8 @@ public class EvMove extends Event {
 		
 		new_time = time + Simulation.expRandom(context.getMove_param()*(1-Math.log(individual.getComfort())));			
 		
+		//System.out.println("Mover" + new_time);
+		
 		context.getPec().addEvent(new EvMove(new_time, individual));
 		individual.move(context.getNewIndividualPosition(individual));
 		

@@ -3,7 +3,7 @@ package static_comp;
 import java.util.ArrayList;
 
 public class Grid {
-	
+
 	/* Fields */
 	private int n;
 	private int m;
@@ -158,5 +158,7 @@ public class Grid {
 	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
+	
+	
 	
 }

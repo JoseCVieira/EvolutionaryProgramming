@@ -1,6 +1,7 @@
 package dynamic_comp;
 
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Random;
 
 import static_comp.Grid;
@@ -19,7 +20,7 @@ public class Population {
 	/* Fields */
 	private int initial_pop;
 	private int max_pop;
-	private ArrayList<Individual> individuals;
+	private LinkedList<Individual> individuals;
 	
 	/**
 	 * Constructs and initializes a new Population with an initial and maximum population
@@ -30,7 +31,7 @@ public class Population {
 	public Population(int initial_pop, int max_pop) {
 		this.initial_pop = initial_pop;
 		this.max_pop = max_pop;
-		individuals = new ArrayList<Individual>();
+		individuals = new LinkedList<Individual>();
 	}
 	
 	/**
@@ -42,9 +43,9 @@ public class Population {
 	 * @param comfort_param
 	 * The parameter of the Individual's comfort.
 	 */
-	void startPopulating(Grid grid, int comfort_param){
+	void startPopulating(Grid grid, int comfort_param, Simulation context){
 		for(int elements = 0; elements < initial_pop; elements++)
-			addIndividual(new Individual(grid, comfort_param));
+			addIndividual(new Individual(grid, comfort_param), context);
 	}
 	
 	
@@ -55,10 +56,10 @@ public class Population {
 	 * @param individual
 	 */
 	
-	void addIndividual(Individual individual) {
+	void addIndividual(Individual individual, Simulation context) {
 		if(individuals.size() >= max_pop)
 			while(individuals.size() >= max_pop)
-				epidemic();
+				epidemic(context);
 		individuals.add(individual);
 	}
 	
@@ -67,20 +68,31 @@ public class Population {
 	 * instantly survive. The rest of the individuals live if the comfort is lower than a random number.
 	 * Otherwise they die (individual is put to null).
 	 */
-	private void epidemic(){
-		ArrayList<Individual> aux = new ArrayList<Individual>();
+	private void epidemic(Simulation context){
+		LinkedList<Individual> aux = new LinkedList<Individual>();
 		Random random = new Random();
-		
+		Event e;
+		Individual i = null;
 		for(int survivors = 0; survivors < NR_SURVIVORS; survivors++)
 			aux.add(getIndMaxComfort());
 		
-		for(Individual i : individuals)			
+		for(Iterator<Individual> iterator = context.getPopulation().individuals.iterator(); iterator.hasNext(); ){	
+			i = iterator.next();
 			if(random.nextFloat() <= i.getComfort())
 				aux.add(i);
-			else
+			else{
+				for(Iterator<Event> it = context.getPec().events.iterator();  it.hasNext(); ){	
+					e = it.next();
+					if(i == e.individual)
+						it.remove();
+				}
+				iterator.remove();
 				i = null;
-		
+			}
+			
+		}	
 		individuals = aux;
+
 	}
 	
 	/**
@@ -110,7 +122,7 @@ public class Population {
 	 * 
 	 * @return ArrayList<Individual>
 	 */
-	ArrayList<Individual> getIndividuals() {
+	LinkedList<Individual> getIndividuals() {
 		return individuals;
 	}
 	

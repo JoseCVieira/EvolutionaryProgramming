@@ -36,16 +36,18 @@ public class EvReproduction extends Event {
 	protected void action(Simulation context) {
 		double new_time;
 		double length_prefix;
-		
+				
 		new_time = time + Simulation.expRandom(context.getReprod_param()*(1-Math.log(individual.getComfort())));
+		
+		//System.out.println("Reprodução" + new_time);
 		
 		context.getPec().addEvent(new EvReproduction(new_time, individual));
 		
-		length_prefix = individual.getLength()*0.9 + individual.getComfort()*0.1;
+		length_prefix = individual.getLength()*0.9 + individual.getComfort();
 		Individual i = new Individual(individual.getGrid(), individual.getPath(),
 				(int)Math.ceil(length_prefix), individual.getComfort_param());
 		
-		context.getPopulation().addIndividual(i);
+		context.getPopulation().addIndividual(i, context);
 		context.createNewBornEvents(i);
 	}
 

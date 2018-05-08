@@ -37,10 +37,12 @@ public class EvDeath extends Event{
 		Event e;
 		for(Iterator<Event> i = context.getPec().events.iterator();  i.hasNext(); ){
 			e = i.next();
-			if(e.individual == individual)
+			if(individual == e.individual)
 				i.remove();
 		}
+		context.getPopulation().getIndividuals().remove(individual);
 		individual = null;
+		
 	}
 	
 }

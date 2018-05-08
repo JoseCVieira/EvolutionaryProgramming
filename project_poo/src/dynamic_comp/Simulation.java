@@ -94,7 +94,7 @@ public class Simulation {
 	 */
 	private void createPopulation(int init_pop, int max_pop, int comfort_param) {
 		population = new Population(init_pop, max_pop);
-		population.startPopulating(getGrid(), comfort_param);
+		population.startPopulating(getGrid(), comfort_param, this);
 		
 		for(Individual i : population.getIndividuals())
 			createNewBornEvents(i);
@@ -146,9 +146,19 @@ public class Simulation {
 	 * @param i
 	 */
 	void createNewBornEvents(Individual i){
-		pec.addEvent(new EvDeath(current_time + expRandom(death_param*(1-Math.log(1-i.getComfort()))), i));
-		pec.addEvent(new EvReproduction(current_time + expRandom(reprod_param*(1-Math.log(i.getComfort()))),i));
-		pec.addEvent(new EvMove(current_time + expRandom(move_param*(1-Math.log(i.getComfort()))), i));
+		
+		double time = current_time + expRandom(death_param*(1-Math.log(1-i.getComfort())));
+		//System.out.println("Morte" + time);
+		pec.addEvent(new EvDeath(time, i));
+		
+		time = current_time + expRandom(reprod_param*(1-Math.log(i.getComfort())));
+		//System.out.println("Reprodução" + time);
+
+		pec.addEvent(new EvReproduction(time,i));
+		
+		time = current_time + expRandom(reprod_param*(1-Math.log(i.getComfort())));
+		//System.out.println("Mover" + time);
+		pec.addEvent(new EvMove(time, i));
 	}
 	/**
 	 * Used to calculate an exponential Random value given a mean value m

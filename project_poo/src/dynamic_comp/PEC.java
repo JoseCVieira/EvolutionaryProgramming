@@ -20,6 +20,7 @@ public class PEC{
 		public int compare(Event o1, Event o2) {
 			if(o1.getTime() > o2.getTime()) return 1;
 			else if(o1.getTime() < o2.getTime()) return -1;
+			else if((o1.getTime() == o2.getTime()) && o1.individual != o2.individual) return 1;
 			else return 0;
 		}});
 	
