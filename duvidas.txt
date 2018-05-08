@@ -1,12 +1,12 @@
 duvidas/falta:
 - UML - sao assim as constantes?
-- inserir print final 
+- UML - leaf é assim?
+
 testes:
 - criar os testes (XML) (5 testes)
--gerar jar
 
 falta:
 - ver FAQs
-- verificar se o UML e Java tem tudo
-    
-
+- verificar se o UML
+- verificar se está tudo comentado
+- gerar jar
