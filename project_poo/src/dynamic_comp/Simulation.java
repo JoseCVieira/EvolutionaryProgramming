@@ -59,7 +59,7 @@ public class Simulation {
 		pec = new PEC();
 		
 		for(int i = 0; i <= N_OBSERVATIONS; i++)
-			pec.addEvent(new EvObservation(i*getFinal_time()/N_OBSERVATIONS));
+			pec.addEvent(new EvObservation((double)i*getFinal_time()/N_OBSERVATIONS));
 		
 		createPopulation(init_pop, max_pop, comfort_param);
 		
