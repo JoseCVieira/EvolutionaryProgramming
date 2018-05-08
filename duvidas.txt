@@ -6,10 +6,10 @@ duvidas/falta:
 - UML - sao assim as constantes?
 - UML - compare triset??
 - verificar as diferenças entre o UML e Java
-- criar os testes (XML) (nao me lembro quantos sao)
+- criar os testes (XML) (5 testes)
 
 testes:
-- dois eventos iguais
+- dois eventos iguais (falta se forem do mesmo individuo mas de tipo diferente)
 - mais??
 
 Penso que esteja tudo certo, mas é melhor verificar novamente:
@@ -18,6 +18,3 @@ Penso que esteja tudo certo, mas é melhor verificar novamente:
     
 perguntar a stora:
 - print final
-- criar DTD??
-- parametro de reprodução?
-- exepções no UML sem throw
