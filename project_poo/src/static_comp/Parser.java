@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
@@ -33,6 +35,7 @@ public class Parser extends DefaultHandler{
 	 * @param atts
 	 * The attributes attached to the element. If there are no attributes, it shall be an empty Attributes object.
 	 */
+	@Override
 	public void startElement(String uri, String name, String tag, Attributes atts){
 		String key = "";
 		if(this.tag == tag)
@@ -59,6 +62,7 @@ public class Parser extends DefaultHandler{
 	 * @param length
 	 * length of the data
 	 */
+	@Override
 	public void characters(char[]ch,int start,int length){
 		Integer []cost = new Integer[1];
 		/*verifies if the tag is the right one*/
@@ -73,7 +77,33 @@ public class Parser extends DefaultHandler{
 			}
 		} 
 	}
-	
+	/**
+	 *	Called when there is a fatal Error when parsing the file
+	 *	builds the exception message and throws a SAXException with that message
+	 */
+	@Override
+	public void fatalError(SAXParseException e) throws SAXException{
+		String error = "fatalError at "+e.getLineNumber()+"\t"+e.getMessage();
+		throw new SAXException(error);
+	}
+	/**
+	 *	Called when there is a Error when parsing the file
+	 *builds the exception message and throws a SAXException with that message
+	 */
+	@Override
+	public void error(SAXParseException e) throws SAXException{
+		String error = "Error at "+e.getLineNumber()+"\t"+e.getMessage();
+		throw new SAXException(error);
+	}
+	/**
+	 *	Called when there is a warning when parsing the file
+	 *	builds the exception message and throws a SAXException with that message
+	 */
+	@Override
+	public void warning(SAXParseException e) throws SAXException{
+		String error = "Warning at "+e.getLineNumber()+"\t"+e.getMessage();
+		throw new SAXException(error);
+	}
 	/**
 	 * Gets a Point object parsed from the xml document according to its tag
 	 * @param tag
@@ -103,6 +133,8 @@ public class Parser extends DefaultHandler{
 				return new Edge(new Point(inputs.get(tag)[0], 
 						inputs.get(tag)[1]), new Point(inputs.get(tag)[2], inputs.get(tag)[3]));
 			}
+				
+			
 	}
 	
 	/**

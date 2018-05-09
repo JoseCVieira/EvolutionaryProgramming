@@ -29,7 +29,6 @@ public class EvMove extends Event {
 	 * @param context
 	 * Simulation where all the individuals and the events are
 	 */
-	@Override
 	protected void action(Simulation context) {
 		double new_time;
 		

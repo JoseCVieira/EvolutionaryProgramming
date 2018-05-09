@@ -41,7 +41,9 @@ public class Individual {
 	 * as well as the length prefix that is used to assign part of the received path
 	 * 
 	 * @param path
+	 * Path belonging to individual's parent
 	 * @param length_prefix
+	 * Length of the path to be inherited from its parent
 	 */
 	Individual(Path path, int length_prefix) {
 		this.path = new Path();
@@ -102,6 +104,7 @@ public class Individual {
 	 * to the grid, it calls the method addEdge where it decide if the individual is repeating the received edge or not.
 	 * At the end where the path is already updated, is attributed its current position.
 	 * @param new_position
+	 * Future position of the individual
 	 */
 	void move(Point new_position) {
 		Edge edge_1 = new Edge(position, new_position);

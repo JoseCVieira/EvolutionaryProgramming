@@ -13,7 +13,9 @@ public class Point {
 	/**
 	 * Constructs class and initializes its attributes
 	 * @param x
+	 * x coordinate of this point
 	 * @param y
+	 * y coordinate of this point
 	 */
 	public Point(int x, int y) {
 		this.x = x;

@@ -23,7 +23,9 @@ public class Population {
 	 * Constructs and initializes a new Population with an initial and maximum population
 	 * 
 	 * @param initial_pop
+	 * int with the size of the initial population 
 	 * @param max_pop
+	 * int with the maximum possible size of the population 
 	 */
 	public Population(int initial_pop, int max_pop) {
 		this.initial_pop = initial_pop;
@@ -47,7 +49,7 @@ public class Population {
 	 * Otherwise it calls the epidemic method.
 	 * 
 	 * @param individual
-	 * 
+	 * Individual object to be added to the population
 	 * @param context
 	 * A Simulation Object
 	 */

@@ -23,8 +23,8 @@ public class EvObservation extends Event{
 	 * related to the Simulation object, context.
 	 * 
 	 * @param context
+	 * Simulation object
 	 */
-	@Override
 	protected void action(Simulation context) {
 		int number = (int)(time*Simulation.N_OBSERVATIONS/context.getFinal_time());
 		

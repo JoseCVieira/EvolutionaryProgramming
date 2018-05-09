@@ -28,8 +28,11 @@ public class Path {
 	 * removed and so the cost.
 	 * 
 	 * @param p1
+	 * Initial Point object of the Edge
 	 * @param p2
+	 * Ending Point object of the Edge
 	 * @param cost
+	 * Related cost of the Edge
 	 */
 	public void addEdge(Point p1, Point p2, int cost){
 		Edge e1 = new Edge(p1, p2, cost); //repeating edge
@@ -88,6 +91,7 @@ public class Path {
 	/**
 	 * sets all edges of the path
 	 * @param edges
+	 * ArrayList of edges
 	 */
 	public void setEdges(ArrayList<Edge> edges) {
 		this.edges = edges;

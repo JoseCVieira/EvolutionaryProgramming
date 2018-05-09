@@ -1,1 +1,1 @@
-typeSearchIndex = [{"p":"static_comp","l":"Path"}]
+typeSearchIndex = [{"p":"static_comp","l":"Point"}]

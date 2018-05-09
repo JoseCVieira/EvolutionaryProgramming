@@ -32,6 +32,7 @@ public class Simulation {
 	/**
 	 * Constructs simulation by using the data parsed by the given object Parser
 	 * @param p
+	 * Parser object with parsed data
 	 */
 	public Simulation(Parser p) {
 		int m = p.getInteger("grid0", 1); //rows
@@ -99,7 +100,9 @@ public class Simulation {
 	 * Creates the population by giving the initial population, max population and a given comfort parameter
 	 * 
 	 * @param init_pop
+	 * int with the size of the initial population 
 	 * @param max_pop
+	 * int with the maximum possible size of the population 
 	 */
 	private void createPopulation(int init_pop, int max_pop) {
 		population = new Population(init_pop, max_pop);
@@ -116,7 +119,8 @@ public class Simulation {
 	 * decide what's the next position.
 	 * 
 	 * @param i
-	 * @return
+	 * Individual from which the method gets its new position
+	 * @return Point
 	 */
 	Point getNewIndividualPosition(Individual i){
 		double rand_double = new Random().nextDouble();
@@ -160,6 +164,7 @@ public class Simulation {
 	/**
 	 * Creates 3 different types of events for a given individual
 	 * @param i
+	 * Individual to which the events are related 
 	 */
 	void createNewBornEvents(Individual i){
 		double time = current_time + expRandom(death_param*(1-Math.log(1-i.getComfort())));
@@ -175,6 +180,7 @@ public class Simulation {
 	/**
 	 * Used to calculate an exponential Random value given a mean value m
 	 * @param m
+	 * double type mean value for exponential random observation
 	 * @return double
 	 */
 	static double expRandom(double m) {
@@ -227,6 +233,7 @@ public class Simulation {
 	/**
 	 * set final hit. True when some individual reach the final position
 	 * @param final_hit
+	 * boolean type 
 	 */
 	void setFinal_hit(boolean final_hit) {
 		this.final_hit = final_hit;
@@ -244,6 +251,7 @@ public class Simulation {
 	 * reach the final position or the individual that has the lower cost path in case of at least one of them reach the final
 	 * position
 	 * @param best_individual
+	 * The related individual object
 	 */
 	void setBest_individual(Individual best_individual) {
 		this.best_individual = best_individual;

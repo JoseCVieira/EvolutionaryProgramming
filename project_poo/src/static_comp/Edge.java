@@ -53,6 +53,7 @@ public class Edge {
 	/**
 	 * cost the cost to set
 	 * @param cost
+	 * integer type value representing the cost to be setted
 	 */
 	void setCost(int cost) {
 		this.cost = cost;

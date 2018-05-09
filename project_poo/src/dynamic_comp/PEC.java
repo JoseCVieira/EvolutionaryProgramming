@@ -9,7 +9,7 @@ import java.util.TreeSet;
  * In this way, the PEC contains an Event TreeSet that introduces events based on their time.
  */
 
-public class PEC{
+public class PEC implements IPendEvHandler{
 	
 	/*fields*/
 	SortedSet<Event> events = new TreeSet<Event>(new Comparator<Event>(){
@@ -26,8 +26,10 @@ public class PEC{
 	 * Adds an event to the Event SortetSet.
 	 * 
 	 * @param event
+	 * object Event to be added
 	 */
-	void addEvent(Event event){
+	@Override
+	public void addEvent(Event event){
 		events.add(event);
 	}
 	
@@ -36,7 +38,8 @@ public class PEC{
 	 * 
 	 * @return Event
 	 */
-	Event nextEvent(){
+	@Override
+	public Event nextEvent(){
 		Event first_event = events.first();
 		events.remove(first_event);
 		return first_event;
