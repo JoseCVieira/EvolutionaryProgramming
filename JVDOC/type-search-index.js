@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"static_comp","l":"Path"}]

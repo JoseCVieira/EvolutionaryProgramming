@@ -61,28 +61,33 @@ public class Path {
 	}
 	
 	/**
-	 * @return path's cost
+	 * Returns path's cost
+	 * @return int
 	 */
 	public int getCost() {
 		return cost;
 	}
 	
 	/**
-	 * @return path's length
+	 * Returns path's length
+	 * @return int
 	 */
 	public int getPathLength() {
 		return edges.size();
 	}
 	
 	/**
-	 * @return path's edges
+	 * Returns path's edges
+	 * @return ArrayList
+	 * ArrayList of edges
 	 */
 	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
 	
 	/**
-	 * @return set all edges of the path
+	 * sets all edges of the path
+	 * @param edges
 	 */
 	public void setEdges(ArrayList<Edge> edges) {
 		this.edges = edges;

@@ -12,8 +12,6 @@ public class EvObservation extends Event{
 	 * 
 	 * @param time
 	 * time at which the event occurs
-	 * @param individual
-	 * the individual that it is assigned to
 	 */
 	EvObservation(double time){
 		super(time, null);

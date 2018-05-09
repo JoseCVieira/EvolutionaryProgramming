@@ -100,7 +100,6 @@ public class Simulation {
 	 * 
 	 * @param init_pop
 	 * @param max_pop
-	 * @param comfort_param
 	 */
 	private void createPopulation(int init_pop, int max_pop) {
 		population = new Population(init_pop, max_pop);

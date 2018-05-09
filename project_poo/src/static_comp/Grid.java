@@ -139,49 +139,56 @@ public class Grid {
 	}
 	
 	/**
-	 * @return returns the max cost in the grid
+	 * returns the max cost in the grid
+	 * @return int
 	 */
 	public int getCmax() {
 		return cmax;
 	}
 	
 	/**
-	 * @return returns the width of the grid
+	 * returns the width of the grid
+	 * @return int
 	 */
 	public int getN() {
 		return n;
 	}
 	
 	/**
-	 * @return height of the grid
+	 * Returns the height of the grid
+	 * @return int
 	 */
 	public int getM() {
 		return m;
 	}
 	
 	/**
-	 * @return the initial position
+	 * Returns the initial position
+	 * @return Point
 	 */
 	public Point getInitial_pos() {
 		return initial_pos;
 	}
 
 	/**
-	 * @return the final position
+	 * Returns the final position
+	 * @return Point
 	 */
 	public Point getFinal_pos() {
 		return final_pos;
 	}
 	
 	/**
-	 * @return all points that are obstacles
+	 * Returns all points that are obstacles
+	 * @return ArrayList
 	 */
 	public ArrayList<Point> getObts() {
 		return obts;
 	}
 	
 	/**
-	 * @return all edges of the grid
+	 * Returns all edges of the grid
+	 * @return ArrayList
 	 */
 	public ArrayList<Edge> getEdges() {
 		return edges;

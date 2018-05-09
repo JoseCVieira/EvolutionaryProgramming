@@ -17,8 +17,10 @@ public class Edge {
 	/**
 	 * Constructs Edge object and initializes its points
 	 * and assigning a default cost of 1
-	 * @param p1 first point of the edge
-	 * @param p2 second point of the edge
+	 * @param p1 
+	 * first point of the edge
+	 * @param p2 
+	 * second point of the edge
 	 */
 	public Edge(Point p1, Point p2) {
 		points = new Point[2];
@@ -31,9 +33,12 @@ public class Edge {
 	/**
 	 * Constructs Edge object and initializes its points
 	 * and assigning a given cost
-	 * @param p1 first point of the edge
-	 * @param p2 second point of the edge
-	 * @param cost non default cost
+	 * @param p1 
+	 * first point of the edge
+	 * @param p2 
+	 * second point of the edge
+	 * @param cost 
+	 * non default cost
 	 */
 	public Edge(Point p1, Point p2, int cost) {
 		points = new Point[2];
@@ -46,21 +51,24 @@ public class Edge {
 	/* Methods */
 	
 	/**
-	 * @param cost the cost to set
+	 * cost the cost to set
+	 * @param cost
 	 */
 	void setCost(int cost) {
 		this.cost = cost;
 	}
 	
 	/**
-	 * @return returns the cost associated with the edge 
+	 * returns the cost associated with the edge 
+	 * @return cost
 	 */
 	public int getCost() {
 		return cost;
 	}
 
 	/**
-	 * @return returns the two points associated with the edge 
+	 * returns the two points associated with the edge 
+	 * @return Point[]
 	 */
 	public Point[] getPoints() {
 		return points;

@@ -22,18 +22,21 @@ public class Point {
 
 	/* Methods */
 	/**
-	 * @return returns the fild X
+	 * returns the field X
+	 * @return int
 	 */
 	public int getX() {
 		return x;
 	}
 	
 	/**
-	 * @return returns the fild Y
+	 * returns the field Y
+	 * @return int
 	 */
 	public int getY() {
 		return y;
 	}
+
 	
 	@Override
 	public int hashCode() {

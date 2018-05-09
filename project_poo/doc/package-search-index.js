@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"static_comp"}]

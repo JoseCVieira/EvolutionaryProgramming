@@ -22,10 +22,16 @@ public class Parser extends DefaultHandler{
 	 * its respective attributes in a String format. This elements are then inserted in a Map object
 	 * which assigns a tag string to an array of integers, providing a way of addressing each attribute using
 	 * the element's tag plus a counter which is used to make sure the tag isn't repeated.
+	 * 
 	 * @param uri
+	 * The Namespace URI, or the empty string if the element has no Namespace URI 
+	 * or if Namespace processing is not being performed.
 	 * @param name
+	 * The local name (without prefix), or the empty string if Namespace processing is not being performed.
 	 * @param tag
+	 * The qualified name (with prefix), or the empty string if qualified names are not available.
 	 * @param atts
+	 * The attributes attached to the element. If there are no attributes, it shall be an empty Attributes object.
 	 */
 	public void startElement(String uri, String name, String tag, Attributes atts){
 		String key = "";
@@ -47,8 +53,11 @@ public class Parser extends DefaultHandler{
 	 * The only element that requires this message is the zone element, on which the cost is defined
 	 * in the character data space. 
 	 * @param ch
+	 * Array with the data characters
 	 * @param start
+	 * starting point of the data
 	 * @param length
+	 * length of the data
 	 */
 	public void characters(char[]ch,int start,int length){
 		Integer []cost = new Integer[1];
@@ -68,7 +77,9 @@ public class Parser extends DefaultHandler{
 	/**
 	 * Gets a Point object parsed from the xml document according to its tag
 	 * @param tag
+	 * tag associated with desired point
 	 * @return Point
+	 * wanted point
 	 */
 	public Point getPoint(String tag) {
 		return new Point(inputs.get(tag)[0], inputs.get(tag)[1]);
@@ -79,7 +90,9 @@ public class Parser extends DefaultHandler{
 	 * Has a try/catch block to prevent the situations where there is no 
 	 * cost associated on the required edge and if that happens, returns the edge without the cost.
 	 * @param tag
+	 * tag associated with desired edge
 	 * @return Edge
+	 * desired edge
 	 */
 	public Edge getEdge(String tag) {
 		try {
@@ -97,8 +110,11 @@ public class Parser extends DefaultHandler{
 	 * according to its tag and index in the xml attributes
 	 * 
 	 * @param tag
+	 * tag associated with int
 	 * @param i
+	 * index of the desired value
 	 * @return Integer
+	 * desired integer
 	 */
 	public Integer getInteger(String tag, int i) {
 		return inputs.get(tag)[i];

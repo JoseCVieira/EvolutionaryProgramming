@@ -33,13 +33,6 @@ public class Population {
 	
 	/**
 	 * Adds n Individuals to the Population Array, where n is the initial population passed in the Population constructor
-	 * 
-	 * @param grid
-	 * The grid related to the map.
-	 * 
-	 * @param comfort_param
-	 * The parameter of the Individual's comfort.
-	 * 
 	 * @param context
 	 * A Simulation Object
 	 */
@@ -124,7 +117,8 @@ public class Population {
 	/**
 	 * Gets all the elements of the population
 	 * 
-	 * @return LinkedList<Individual>
+	 * @return LinkedList
+	 * Linked list of individuals objects
 	 */
 	LinkedList<Individual> getIndividuals() {
 		return individuals;
