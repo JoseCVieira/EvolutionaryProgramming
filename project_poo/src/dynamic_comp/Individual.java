@@ -47,7 +47,6 @@ public class Individual {
 	 */
 	Individual(Path path, int length_prefix) {
 		this.path = new Path();
-
 		
 		ArrayList<Edge> edges = new ArrayList<Edge>();
 		
@@ -57,10 +56,10 @@ public class Individual {
 			edges = new ArrayList<Edge> (path.getEdges().subList(0, length_prefix));
 		
 		this.path.setEdges(edges);
-		length = path.getPathLength();
+		length = this.path.getPathLength();
 		
 		if(length != 0)
-			position = path.getEdges().get(length - 1).getPoints()[1];
+			position = this.path.getEdges().get(length - 1).getPoints()[1];
 		else
 			position = grid.getInitial_pos();
 		
@@ -109,7 +108,7 @@ public class Individual {
 	void move(Point new_position) {
 		Edge edge_1 = new Edge(position, new_position);
 		Edge edge_2 = new Edge(new_position, position);
-		
+
 		for(Edge edge : grid.getEdges()) {
 			if(edge_1.equals(edge) || edge_2.equals(edge)) {
 				path.addEdge(position, new_position, edge.getCost());
@@ -117,12 +116,7 @@ public class Individual {
 			}
 		}
 		
-		//position = new_position;
-		if(path.getPathLength() != 0)
-			position = path.getEdges().get(path.getPathLength() - 1).getPoints()[1];
-		else
-			position = grid.getInitial_pos();
-			
+		position = new_position;
 		length = path.getPathLength();
 		calculateDist();
 		calculateComfort();

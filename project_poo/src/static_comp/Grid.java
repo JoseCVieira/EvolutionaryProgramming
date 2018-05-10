@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Their fields are set based on the XML file and they will not be changed during the simulation
  */
 
-public class Grid {
+public class Grid implements IGrid{
 
 	/* Fields */
 	private int n;
@@ -49,7 +49,8 @@ public class Grid {
 	/**
 	 * Generates edges according to a given m and n attributes
 	 */
-	private void generateEdges(){
+	@Override
+	public void generateEdges(){
 		Point point_1, point_2;
 		Edge edge;
 		
@@ -75,7 +76,8 @@ public class Grid {
 	/**
 	 * Creates edges belonging to a special zone
 	 */
-	private void create_specialEdges() {
+	@Override
+	public void create_specialEdges() {
 		int ini_x, ini_y, final_x, final_y;
 		Edge e;
 		Point p1, p2;
@@ -131,7 +133,8 @@ public class Grid {
 	/**
 	 * Finds max cost in the grid by searching in sZones List
 	 */
-	private void calculateMaxCost(){
+	@Override
+	public void calculateMaxCost(){
 		cmax = -1;
 		for(Edge sZone : sZones)
 			if(sZone.getCost() > cmax)

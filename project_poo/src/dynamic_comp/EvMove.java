@@ -29,7 +29,7 @@ public class EvMove extends Event {
 	 * @param context
 	 * Simulation where all the individuals and the events are
 	 */
-	protected void action(Simulation context) {
+	public void action(Simulation context) {
 		double new_time;
 		
 		new_time = time + Simulation.expRandom(context.getMove_param()*(1-Math.log(individual.getComfort())));			
