@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 import static_comp.Edge;
 import static_comp.Grid;
 import static_comp.Parser;
+import static_comp.Path;
 import static_comp.Point;
 
 /**
@@ -105,6 +106,8 @@ public class Simulation {
 		}
 		
 		System.out.println("\n\n\tPath of the best fit individual:\t"+best_individual.getPath());
+		
+		System.out.println(this);
 	}
 	
 	/**
@@ -282,5 +285,62 @@ public class Simulation {
 	int getFinal_time() {
 		return final_time;
 	}
+	
+	@Override
+		public String toString() {
+			String print = "";
+			boolean obst = false;
+			
+			Individual ind = best_individual;
+			
+			print +="*** Best individual ***\n\n";
+			print +="current time = " +current_time+"\n";
+			print +="position = " +ind.getPosition()+ "\n";
+			print +="cost = " +ind.getPath().getCost()+"\n";
+			print +="comfort = " +ind.getComfort()+ "\n";
+			print +="dist = " +ind.getDist()+ "\n";
+			print +="length = " +ind.getLength() +"\n";
+			print +="final_hit = "+isFinal_hit() +"\n\n";
+			
+			ArrayList<Edge> b_path = best_individual.getPath().getEdges();
+			
+			print +="path =\n" + ind.getPath()+"\n\n";
+			for(int i = 1; i <= getGrid().getM(); i++) {
+				for(int j = 1; j <= getGrid().getN(); j++) {
+	
+					boolean a = false;
+					for(Edge e : b_path) {
+						if(e.getPoints()[0].equals(new Point(j, i))) {
+							print +="[B]";
+							a = true;
+						}
+					}
+					
+					if(!a)
+						print +="   ";
+	
+					obst = false;
+					for(Point p : getGrid().getObts())
+						if(p.equals(new Point(j, i)))
+							obst = true;
+					
+					if(obst)
+						print +="[O]";
+					else {
+						if(getGrid().getInitial_pos().equals(new Point(j, i)))
+							print +="[I]";
+						else if(getGrid().getFinal_pos().equals(new Point(j, i)))
+						print +="[F]";
+						else
+							print +="   ";
+					}
+					print +=new Point(j, i);
+					print +="   ";
+				}
+				print +="\n\n";
+			}
+			
+			return print;
+		}	
 	
 }
