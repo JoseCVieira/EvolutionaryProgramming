@@ -1,7 +1,3 @@
-duvidas/falta:
-- UML - sao assim as constantes?
-- UML - leaf é assim?
-
 testes:
 - criar os testes (XML) (5 testes)
 

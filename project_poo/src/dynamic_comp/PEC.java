@@ -31,6 +31,7 @@ public class PEC implements IPendEvHandler{
 	@Override
 	public void addEvent(Event event){
 		events.add(event);
+		System.out.println(event);
 	}
 	
 	/**
@@ -42,6 +43,7 @@ public class PEC implements IPendEvHandler{
 	public Event nextEvent(){
 		Event first_event = events.first();
 		events.remove(first_event);
+		
 		return first_event;
 	}
 	

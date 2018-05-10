@@ -89,8 +89,10 @@ public class Simulation {
 				/*Event Action*/
 				current_event.action(this);
 				event_counter++;
-			}else
+			}else {
 				current_time = getFinal_time();
+				break;
+			}
 		}
 		
 		System.out.println("\n\n\tPath of the best fit individual:\t"+best_individual.getPath());
