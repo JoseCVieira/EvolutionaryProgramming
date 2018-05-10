@@ -3,6 +3,8 @@ package dynamic_comp;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.xml.sax.SAXException;
+
 import static_comp.Edge;
 import static_comp.Grid;
 import static_comp.Parser;
@@ -33,8 +35,10 @@ public class Simulation {
 	 * Constructs simulation by using the data parsed by the given object Parser
 	 * @param p
 	 * Parser object with parsed data
+	 * @throws SAXException 
+	 * Throws sax exception comming from parser when trying to get null objects
 	 */
-	public Simulation(Parser p) {
+	public Simulation(Parser p) throws SAXException {
 		int m = p.getInteger("grid0", 1); //rows
 		int n = p.getInteger("grid0", 0); //cols
 		
@@ -42,16 +46,19 @@ public class Simulation {
 		Point finalPoint = p.getPoint("finalpoint0");
 		int nzones = p.getInteger("specialcostzones0", 0);
 		ArrayList<Edge> sZones = new ArrayList<Edge>();
-		
-		for(int i= 0; i < nzones; i++)
-			sZones.add(p.getEdge("zone"+i));
-		
+		for(int i= 0; i < nzones; i++) {
+			Edge e = p.getEdge("zone"+i);
+			if(e != null)
+				sZones.add(e);
+			
+		}
 		int nobsts = p.getInteger("obstacles0", 0);
 		ArrayList<Point> obsts = new ArrayList<Point>();
 		for(int i= 0; i < nobsts; i++)
 			obsts.add( p.getPoint("obstacle"+i));
 		
 		this.final_time = p.getInteger("simulation0", 0);
+		
 		int init_pop = p.getInteger("simulation0", 1);		
 		int max_pop = p.getInteger("simulation0", 2);
 		int comfort_param = p.getInteger("simulation0", 3);

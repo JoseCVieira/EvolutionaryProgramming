@@ -46,7 +46,10 @@ public class Parser extends DefaultHandler{
 		key = ""+tag+counter;
 		Integer []array = new Integer[Integer.valueOf(atts.getLength())];
 		for(int i = 0; i < atts.getLength();i++) {
-			array[i] = Integer.valueOf(atts.getValue(i));
+			if(atts.getValue(i).matches(".*\\d.*")){
+				array[i] = Integer.valueOf(atts.getValue(i));
+			}
+			
 		}
 		inputs.put(key, array);
 	}
@@ -110,28 +113,42 @@ public class Parser extends DefaultHandler{
 	 * tag associated with desired point
 	 * @return Point
 	 * wanted point
+	 * @throws SAXException
+	 * when trying to get a point with tag undefined or when number of obstacles 
+	 * is wrongly defined in xml file
 	 */
-	public Point getPoint(String tag) {
+	public Point getPoint(String tag) throws SAXException {
+		try {
 		return new Point(inputs.get(tag)[0], inputs.get(tag)[1]);
+		}catch(NullPointerException e) {
+			String error = "Error getting Point with tag: "+tag+"\twrong number of obstacles specified or tag does not exist";
+			throw new SAXException(error);
+		}
 	}
 	
 	/**
 	 * Gets an Edge object parsed from the xml document according to its tag.
 	 * Has a try/catch block to prevent the situations where there is no 
 	 * cost associated on the required edge and if that happens, returns the edge without the cost.
+	 * 
 	 * @param tag
 	 * tag associated with desired edge
 	 * @return Edge
 	 * desired edge
+	 * @throws SAXException
+	 * Throws SAXException when the wrong number of zones is specified or the edge doesn't have a cost
+	 * in the respective xml file 
 	 */
-	public Edge getEdge(String tag) {
-		try {
-			int cost =inputs.get(tag+"cost")[0];
+	public Edge getEdge(String tag) throws SAXException{
+	
+			
+			try {
+				int cost =inputs.get(tag+"cost")[0];
 			return new Edge(new Point(inputs.get(tag)[0], 
 					inputs.get(tag)[1]), new Point(inputs.get(tag)[2], inputs.get(tag)[3]), cost);
-			}catch(NullPointerException e) {
-				return new Edge(new Point(inputs.get(tag)[0], 
-						inputs.get(tag)[1]), new Point(inputs.get(tag)[2], inputs.get(tag)[3]));
+			}catch(NullPointerException e){
+				String error = "Error getting Edge with tag: "+tag+"\twrong number of zones specified or cost undefined or tag does not exist";
+				throw new SAXException(error);
 			}
 				
 			
@@ -147,9 +164,23 @@ public class Parser extends DefaultHandler{
 	 * index of the desired value
 	 * @return Integer
 	 * desired integer
+	 * @throws SAXException
+	 * when trying to get some integer with undefined value in xml file or specified tag is inexistent
 	 */
-	public Integer getInteger(String tag, int i) {
-		return inputs.get(tag)[i];
+	public Integer getInteger(String tag, int i) throws SAXException{
+		try {
+		Integer val = inputs.get(tag)[i];
+		if(val != null) {
+			return val;
+		}else{
+			String error = "Error getting Point with tag: "+tag+"\tvalue is not an int";
+			throw new SAXException(error);
+		}
+		}catch(NullPointerException e) {
+			String error = "Error getting Point with tag: "+tag+"\tdoes not exist";
+			throw new SAXException(error);
+		}
+		
 	}
 	
 }
