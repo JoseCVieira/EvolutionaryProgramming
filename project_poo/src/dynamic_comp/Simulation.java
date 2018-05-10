@@ -25,7 +25,7 @@ public class Simulation {
 	private int event_counter;
 	private Population population;
 	private Grid grid;
-	private PEC pec;
+	private Pec pec;
 	private Event current_event;
 	private Individual best_individual;
 	
@@ -60,7 +60,7 @@ public class Simulation {
 		this.reprod_param = p.getInteger("move0", 0);
 		
 		grid = new Grid(n, m, obsts, sZones, initialPoint, finalPoint);
-		pec = new PEC();
+		pec = new Pec();
 		
 		Individual.grid = grid;
 		Individual.comfort_param = comfort_param;
@@ -156,10 +156,11 @@ public class Simulation {
 		int npoints = possible_positions.size();
 		int index = 0;
 		for(Point p : possible_positions) {
-			if(rand_double <= (double)(index + 1)/npoints)
+			if(rand_double <= (double)(index + 1)/npoints) 
 				return p;
 			index++;
-		}		
+		}
+		
 		return null;
 	}
 	
@@ -214,7 +215,7 @@ public class Simulation {
 	/**
 	 * @return returns pec
 	 */
-	PEC getPec() {
+	Pec getPec() {
 		return pec;
 	}
 

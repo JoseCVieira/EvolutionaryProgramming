@@ -28,7 +28,7 @@ public class EvDeath extends Event{
 	 * @param context
 	 * Simulation where all the individuals and the events are
 	 */
-	protected void action(Simulation context) {
+	public void action(Simulation context) {
 		Event e;
 		for(Iterator<Event> i = context.getPec().events.iterator();  i.hasNext(); ){
 			e = i.next();

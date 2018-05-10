@@ -6,7 +6,7 @@ package dynamic_comp;
  * based on the function that the Event's subclass should have when its time comes.
  */
 
-public abstract class Event {
+public abstract class Event implements IEvent{
 	
 	/*fields*/
 	protected double time;
@@ -33,7 +33,8 @@ public abstract class Event {
 	 * @param context
 	 * Simulation where all the individuals and the events are
 	 */
-	protected abstract void action(Simulation context);
+	@Override
+	public abstract void action(Simulation context);
 
 	/**
 	 * Returns the time of the Event

@@ -25,7 +25,7 @@ public class EvObservation extends Event{
 	 * @param context
 	 * Simulation object
 	 */
-	protected void action(Simulation context) {
+	public void action(Simulation context) {
 		int number = (int)(time*Simulation.N_OBSERVATIONS/context.getFinal_time());
 		
 		System.out.println("Observation "+number+":");

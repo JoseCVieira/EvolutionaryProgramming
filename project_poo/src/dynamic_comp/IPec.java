@@ -1,6 +1,6 @@
 package dynamic_comp;
 
-public interface IPendEvHandler {
+public interface IPec {
 	/**
 	 * Adds an event to the Event SortetSet.
 	 * 

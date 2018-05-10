@@ -44,15 +44,15 @@ public class Path {
 		ArrayList<Edge> new_path = new ArrayList<Edge>();
 		
 		for(Edge edge : edges) {
-			if(e1.equals(edge))
+			if(e1.equals(edge)) {
 				break;
-			else if(e2.equals(edge)) {
+			}else if(e2.equals(edge)) {
 				repeating = true;
 				break;
+			}else {
+				new_path.add(edge);
+				this.cost += edge.getCost();
 			}
-			
-			new_path.add(edge);
-			this.cost += edge.getCost();
 		}
 		
 		if(!repeating) {

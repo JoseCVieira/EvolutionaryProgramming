@@ -27,7 +27,7 @@ public class EvReproduction extends Event {
 	 * @param context
 	 * Simulation where all the individuals and the events are
 	 */
-	protected void action(Simulation context) {
+	public void action(Simulation context) {
 		double new_time;
 		double length_prefix;
 				
