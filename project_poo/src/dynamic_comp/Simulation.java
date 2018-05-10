@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 import static_comp.Edge;
 import static_comp.Grid;
 import static_comp.Parser;
+import static_comp.Path;
 import static_comp.Point;
 
 /**
@@ -18,16 +19,16 @@ public class Simulation {
 	
 	static final int N_OBSERVATIONS = 20;
 	
-	private int final_time;
-	private int death_param;
-	private int reprod_param;
-	private int move_param;
+	private final int final_time;
+	private final int death_param;
+	private final int reprod_param;
+	private final int move_param;
 	private double current_time;
 	private boolean final_hit;
 	private int event_counter;
 	private Population population;
-	private Grid grid;
-	private Pec pec;
+	private final Grid grid;
+	private final Pec pec;
 	private Event current_event;
 	private Individual best_individual;
 	
@@ -83,10 +84,12 @@ public class Simulation {
 	
 	/**
 	 * Makes simulation to read each event one by one and making it actuate
+	 * while the final time isn't reached and the event container (PEC) isn't empty.
+	 * In the end, the best path is printed.
 	 */
 	public void startSimulation() {
 		while(current_time <= getFinal_time()) {
-			if(!pec.events.isEmpty()){
+			if(!pec.getEvents().isEmpty()){
 				current_event = pec.nextEvent();
 				
 				if(current_event.getTime() <= getFinal_time())
@@ -103,10 +106,12 @@ public class Simulation {
 		}
 		
 		System.out.println("\n\n\tPath of the best fit individual:\t"+best_individual.getPath());
+		
+		System.out.println(this);
 	}
 	
 	/**
-	 * Creates the population by giving the initial population, max population and a given comfort parameter
+	 * Creates the population by giving the initial population and the max population
 	 * 
 	 * @param init_pop
 	 * int with the size of the initial population 
@@ -280,5 +285,62 @@ public class Simulation {
 	int getFinal_time() {
 		return final_time;
 	}
+	
+	@Override
+		public String toString() {
+			String print = "";
+			boolean obst = false;
+			
+			Individual ind = best_individual;
+			
+			print +="*** Best individual ***\n\n";
+			print +="current time = " +current_time+"\n";
+			print +="position = " +ind.getPosition()+ "\n";
+			print +="cost = " +ind.getPath().getCost()+"\n";
+			print +="comfort = " +ind.getComfort()+ "\n";
+			print +="dist = " +ind.getDist()+ "\n";
+			print +="length = " +ind.getLength() +"\n";
+			print +="final_hit = "+isFinal_hit() +"\n\n";
+			
+			ArrayList<Edge> b_path = best_individual.getPath().getEdges();
+			
+			print +="path =\n" + ind.getPath()+"\n\n";
+			for(int i = 1; i <= getGrid().getM(); i++) {
+				for(int j = 1; j <= getGrid().getN(); j++) {
+	
+					boolean a = false;
+					for(Edge e : b_path) {
+						if(e.getPoints()[0].equals(new Point(j, i))) {
+							print +="[B]";
+							a = true;
+						}
+					}
+					
+					if(!a)
+						print +="   ";
+	
+					obst = false;
+					for(Point p : getGrid().getObts())
+						if(p.equals(new Point(j, i)))
+							obst = true;
+					
+					if(obst)
+						print +="[O]";
+					else {
+						if(getGrid().getInitial_pos().equals(new Point(j, i)))
+							print +="[I]";
+						else if(getGrid().getFinal_pos().equals(new Point(j, i)))
+						print +="[F]";
+						else
+							print +="   ";
+					}
+					print +=new Point(j, i);
+					print +="   ";
+				}
+				print +="\n\n";
+			}
+			
+			return print;
+		}	
 	
 }

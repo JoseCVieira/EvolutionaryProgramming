@@ -22,22 +22,19 @@ public class EvDeath extends Event{
 	}
 
 	/**
-	 * Eliminates all the events that belong to the individual that died and puts the individual 
-	 * that belongs to this event pointing to null.
+	 * Eliminates all the events that belong to the individual and eliminates him from his population LinkedList.
 	 * 
 	 * @param context
 	 * Simulation where all the individuals and the events are
 	 */
 	public void action(Simulation context) {
 		Event e;
-		for(Iterator<Event> i = context.getPec().events.iterator();  i.hasNext(); ){
+		for(Iterator<Event> i = context.getPec().getEvents().iterator();  i.hasNext(); ){
 			e = i.next();
-			if(individual == e.individual)
+			if(this.getIndividual() == e.getIndividual())
 				i.remove();
 		}
-		context.getPopulation().getIndividuals().remove(individual);
-		individual = null;
-		
+		context.getPopulation().getIndividuals().remove(this.getIndividual());
 	}
-	
+		
 }

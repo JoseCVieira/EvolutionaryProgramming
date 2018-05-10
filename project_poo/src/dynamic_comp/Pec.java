@@ -12,13 +12,13 @@ import java.util.TreeSet;
 public class Pec implements IPec{
 	
 	/*fields*/
-	SortedSet<Event> events = new TreeSet<Event>(new Comparator<Event>(){
+	private SortedSet<Event> events = new TreeSet<Event>(new Comparator<Event>(){
 
 		@Override
 		public int compare(Event o1, Event o2) {
 			if(o1.getTime() > o2.getTime()) return 1;
 			else if(o1.getTime() < o2.getTime()) return -1;
-			else if((o1.getTime() == o2.getTime()) && o1.individual != o2.individual) return 1;
+			else if((o1.getTime() == o2.getTime()) && o1.getIndividual() != o2.getIndividual()) return 1;
 			else return 0;
 		}});
 	
@@ -43,6 +43,10 @@ public class Pec implements IPec{
 		Event first_event = events.first();
 		events.remove(first_event);
 		return first_event;
+	}
+
+	public SortedSet<Event> getEvents() {
+		return events;
 	}
 	
 }
