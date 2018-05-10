@@ -316,7 +316,7 @@ public class Simulation {
 					}
 				}
 				
-				if(!flag) {
+				if(!flag && b_path.size() != 0) {
 					if(b_path.get(b_path.size()-1).getPoints()[1].equals(new Point(j, i))) {
 						print +="[B]";
 					}else
