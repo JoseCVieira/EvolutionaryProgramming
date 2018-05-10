@@ -74,8 +74,6 @@ public class Individual {
 	 * all points are non obstacles and ignoring the cost of the moves.
 	 */
 	private void calculateDist(){
-		System.out.println("Ind:" + position.toString());
-		System.out.println("Gre:" + grid.getFinal_pos().toString());
 		dist = Math.abs(position.getX() - grid.getFinal_pos().getX()) + Math.abs(position.getY() - grid.getFinal_pos().getY());
 	}
 	
