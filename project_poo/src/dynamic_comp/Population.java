@@ -15,8 +15,8 @@ public class Population {
 	private static final int NR_SURVIVORS = 5;
 
 	/* Fields */
-	private int initial_pop;
-	private int max_pop;
+	private final int initial_pop;
+	private final int max_pop;
 	private LinkedList<Individual> individuals;
 	
 	/**
@@ -38,7 +38,7 @@ public class Population {
 	 * @param context
 	 * A Simulation Object
 	 */
-	void startPopulating(Simulation context){
+	public void startPopulating(Simulation context){
 		for(int elements = 0; elements < initial_pop; elements++)
 			addIndividual(new Individual(), context);
 	}
@@ -54,7 +54,7 @@ public class Population {
 	 * A Simulation Object
 	 */
 	
-	void addIndividual(Individual individual, Simulation context) {
+	public void addIndividual(Individual individual, Simulation context) {
 		if(individuals.size() >= max_pop)
 			while(individuals.size() >= max_pop)
 				epidemic(context);
@@ -82,9 +82,9 @@ public class Population {
 			if(random.nextFloat() <= i.getComfort())
 				aux.add(i);
 			else{
-				for(Iterator<Event> it = context.getPec().events.iterator();  it.hasNext(); ){	
+				for(Iterator<Event> it = context.getPec().getEvents().iterator();  it.hasNext(); ){	
 					e = it.next();
-					if(i == e.individual)
+					if(i == e.getIndividual())
 						it.remove();
 				}
 				iterator.remove();

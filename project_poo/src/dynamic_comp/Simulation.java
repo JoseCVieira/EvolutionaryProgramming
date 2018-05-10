@@ -18,16 +18,16 @@ public class Simulation {
 	
 	static final int N_OBSERVATIONS = 20;
 	
-	private int final_time;
-	private int death_param;
-	private int reprod_param;
-	private int move_param;
+	private final int final_time;
+	private final int death_param;
+	private final int reprod_param;
+	private final int move_param;
 	private double current_time;
 	private boolean final_hit;
 	private int event_counter;
 	private Population population;
-	private Grid grid;
-	private Pec pec;
+	private final Grid grid;
+	private final Pec pec;
 	private Event current_event;
 	private Individual best_individual;
 	
@@ -83,10 +83,12 @@ public class Simulation {
 	
 	/**
 	 * Makes simulation to read each event one by one and making it actuate
+	 * while the final time isn't reached and the event container (PEC) isn't empty.
+	 * In the end, the best path is printed.
 	 */
 	public void startSimulation() {
 		while(current_time <= getFinal_time()) {
-			if(!pec.events.isEmpty()){
+			if(!pec.getEvents().isEmpty()){
 				current_event = pec.nextEvent();
 				
 				if(current_event.getTime() <= getFinal_time())
@@ -106,7 +108,7 @@ public class Simulation {
 	}
 	
 	/**
-	 * Creates the population by giving the initial population, max population and a given comfort parameter
+	 * Creates the population by giving the initial population and the max population
 	 * 
 	 * @param init_pop
 	 * int with the size of the initial population 

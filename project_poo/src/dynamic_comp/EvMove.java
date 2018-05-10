@@ -32,28 +32,28 @@ public class EvMove extends Event {
 	public void action(Simulation context) {
 		double new_time;
 		
-		new_time = time + Simulation.expRandom(context.getMove_param()*(1-Math.log(individual.getComfort())));			
+		new_time = this.getTime() + Simulation.expRandom(context.getMove_param()*(1-Math.log(this.getIndividual().getComfort())));			
 		
-		context.getPec().addEvent(new EvMove(new_time, individual));
-		individual.move(context.getNewIndividualPosition(individual));
+		context.getPec().addEvent(new EvMove(new_time, this.getIndividual()));
+		this.getIndividual().move(context.getNewIndividualPosition(this.getIndividual()));
 		
 		if(!context.isFinal_hit()) {
-			if(individual.getPosition().equals(context.getGrid().getFinal_pos())) {
+			if(this.getIndividual().getPosition().equals(context.getGrid().getFinal_pos())) {
 				context.setFinal_hit(true);
 				
-				Individual i = new Individual(individual.getPath(), individual.getPath().getPathLength());
+				Individual i = new Individual(this.getIndividual().getPath(), this.getIndividual().getPath().getPathLength());
 				context.setBest_individual(i);
 				
-			}else if(individual.getComfort() > context.getBest_individual().getComfort()) {
+			}else if(this.getIndividual().getComfort() > context.getBest_individual().getComfort()) {
 				
-				Individual i = new Individual(individual.getPath(), individual.getPath().getPathLength());
+				Individual i = new Individual(this.getIndividual().getPath(), this.getIndividual().getPath().getPathLength());
 				context.setBest_individual(i);
 			}
 		} else {
-			if(individual.getPosition().equals(context.getGrid().getFinal_pos())) {				
-				if(individual.getPath().getCost() < context.getBest_individual().getPath().getCost()) {
+			if(this.getIndividual().getPosition().equals(context.getGrid().getFinal_pos())) {				
+				if(this.getIndividual().getPath().getCost() < context.getBest_individual().getPath().getCost()) {
 					
-					Individual i = new Individual(individual.getPath(),	individual.getPath().getPathLength());
+					Individual i = new Individual(this.getIndividual().getPath(),	this.getIndividual().getPath().getPathLength());
 					context.setBest_individual(i);
 				}
 			}

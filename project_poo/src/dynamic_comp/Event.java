@@ -9,8 +9,8 @@ package dynamic_comp;
 public abstract class Event implements IEvent{
 	
 	/*fields*/
-	protected double time;
-	protected Individual individual;
+	private final double time;
+	private final Individual individual;
 	
 	/**
 	 * Constructs an Event with a specific time and individual. To be used needs
@@ -43,6 +43,16 @@ public abstract class Event implements IEvent{
 	 */
 	protected final double getTime() {
 		return time;
+	}
+	
+	/**
+	 * Returns the individual of the Event
+	 * 
+	 * @return individual
+	 */
+	
+	protected final Individual getIndividual(){
+		return individual;
 	}
 	
 }

@@ -26,10 +26,10 @@ public class EvObservation extends Event{
 	 * Simulation object
 	 */
 	public void action(Simulation context) {
-		int number = (int)(time*Simulation.N_OBSERVATIONS/context.getFinal_time());
+		int number = (int)(this.getTime()*Simulation.N_OBSERVATIONS/context.getFinal_time());
 		
 		System.out.println("Observation "+number+":");
-		System.out.println("\t\t Present Instant:\t\t\t"+time);
+		System.out.println("\t\t Present Instant:\t\t\t"+this.getTime());
 		System.out.println("\t\t Number Of Realized Events:\t\t"+context.getEvent_counter());
 		System.out.println("\t\t Population Size:\t\t\t"+context.getPopulation().getIndividuals().size());
 		System.out.print("\t\t Final point has been hit:\t\t");

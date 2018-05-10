@@ -31,18 +31,18 @@ public class EvReproduction extends Event {
 		double new_time;
 		double length_prefix;
 				
-		new_time = time + Simulation.expRandom(context.getReprod_param()*(1-Math.log(individual.getComfort())));
+		new_time = this.getTime() + Simulation.expRandom(context.getReprod_param()*(1-Math.log(this.getIndividual().getComfort())));
 			
-		context.getPec().addEvent(new EvReproduction(new_time, individual));
+		context.getPec().addEvent(new EvReproduction(new_time, this.getIndividual()));
 		
-		length_prefix = individual.getLength()*0.9 + individual.getComfort();
-		Individual i = new Individual(individual.getPath(), (int)Math.ceil(length_prefix));
+		length_prefix = this.getIndividual().getLength()*0.9 + 0.1*this.getIndividual().getComfort();
+		Individual i = new Individual(this.getIndividual().getPath(), (int)Math.ceil(length_prefix));
 		
 		context.getPopulation().addIndividual(i, context);
 		context.createNewBornEvents(i);
 		
 		if(!context.isFinal_hit())
-			if(individual.getComfort() > context.getBest_individual().getComfort())
+			if(this.getIndividual().getComfort() > context.getBest_individual().getComfort())
 				context.setBest_individual(i);
 		
 	}
