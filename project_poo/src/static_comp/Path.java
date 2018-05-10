@@ -35,8 +35,6 @@ public class Path {
 	 * Related cost of the Edge
 	 */
 	public void addEdge(Point p1, Point p2, int cost){
-		Edge e1 = new Edge(p1, p2, cost); //repeating edge
-		
 		boolean repeating = false;
 		
 		this.cost = 0;
@@ -53,7 +51,7 @@ public class Path {
 		}
 		
 		if(!repeating) {
-			new_path.add(e1);
+			new_path.add(new Edge(p1, p2, cost));
 			this.cost += cost;
 		}
 		
