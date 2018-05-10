@@ -59,7 +59,7 @@ public class Individual {
 		length = this.path.getPathLength();
 		
 		if(length != 0)
-			position = this.path.getEdges().get(length - 1).getPoints()[1];
+			position =  this.path.getEdges().get(length - 1).getPoints()[1];
 		else
 			position = grid.getInitial_pos();
 		
@@ -74,6 +74,8 @@ public class Individual {
 	 * all points are non obstacles and ignoring the cost of the moves.
 	 */
 	private void calculateDist(){
+		System.out.println("Ind:" + position.toString());
+		System.out.println("Gre:" + grid.getFinal_pos().toString());
 		dist = Math.abs(position.getX() - grid.getFinal_pos().getX()) + Math.abs(position.getY() - grid.getFinal_pos().getY());
 	}
 	
@@ -116,8 +118,12 @@ public class Individual {
 			}
 		}
 		
-		position = new_position;
 		length = path.getPathLength();
+		if(length != 0)
+			position =  this.path.getEdges().get(length - 1).getPoints()[1];
+		else
+			position = grid.getInitial_pos();
+		
 		calculateDist();
 		calculateComfort();
 	}
