@@ -36,7 +36,6 @@ public class Path {
 	 */
 	public void addEdge(Point p1, Point p2, int cost){
 		Edge e1 = new Edge(p1, p2, cost); //repeating edge
-		Edge e2 = new Edge(p2, p1, cost); //coming back
 		
 		boolean repeating = false;
 		
@@ -44,12 +43,12 @@ public class Path {
 		ArrayList<Edge> new_path = new ArrayList<Edge>();
 		
 		for(Edge edge : edges) {
-			if(e1.equals(edge)) {
-				break;
-			}else if(e2.equals(edge)) {
+			if(p2.equals(edge.getPoints()[0])) {
 				repeating = true;
 				break;
-			}else {
+			}else if(p2.equals(edge.getPoints()[1]))
+				break;
+			else {
 				new_path.add(edge);
 				this.cost += edge.getCost();
 			}
