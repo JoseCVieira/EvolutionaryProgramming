@@ -316,8 +316,12 @@ public class Simulation {
 						}
 					}
 					
-					if(!a)
-						print +="   ";
+					if(!a) {
+						if(b_path.get(b_path.size()-1).getPoints()[1].equals(new Point(j, i))) {
+							print +="[B]";
+						}else
+							print +="   ";
+					}
 	
 					obst = false;
 					for(Point p : getGrid().getObts())
