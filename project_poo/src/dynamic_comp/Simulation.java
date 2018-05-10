@@ -290,7 +290,7 @@ public class Simulation {
 		String print = "";
 		boolean obst = false;
 		
-		Individual ind = best_individual;
+		/*Individual ind = best_individual;
 		
 		print +="*** Best individual ***\n\n";
 		print +="current time = " +current_time+"\n";
@@ -299,11 +299,12 @@ public class Simulation {
 		print +="comfort = " +ind.getComfort()+ "\n";
 		print +="dist = " +ind.getDist()+ "\n";
 		print +="length = " +ind.getLength() +"\n";
-		print +="final_hit = "+isFinal_hit() +"\n\n";
+		print +="final_hit = "+isFinal_hit() +"\n\n";*/
 		
 		ArrayList<Edge> b_path = best_individual.getPath().getEdges();
 		
-		print +="path =\n" + ind.getPath()+"\n\n";
+		//print +="path =\n" + ind.getPath()+"\n\n";
+		print +="\n";
 		for(int i = 1; i <= getGrid().getM(); i++) {
 			for(int j = 1; j <= getGrid().getN(); j++) {
 
