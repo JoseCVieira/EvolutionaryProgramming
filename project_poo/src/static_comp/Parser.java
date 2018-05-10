@@ -80,6 +80,7 @@ public class Parser extends DefaultHandler{
 			}
 		} 
 	}
+	
 	/**
 	 *	Called when there is a fatal Error when parsing the file
 	 *	builds the exception message and throws a SAXException with that message
@@ -89,6 +90,7 @@ public class Parser extends DefaultHandler{
 		String error = "fatalError at "+e.getLineNumber()+"\t"+e.getMessage();
 		throw new SAXException(error);
 	}
+	
 	/**
 	 *	Called when there is a Error when parsing the file
 	 *builds the exception message and throws a SAXException with that message
@@ -98,6 +100,7 @@ public class Parser extends DefaultHandler{
 		String error = "Error at "+e.getLineNumber()+"\t"+e.getMessage();
 		throw new SAXException(error);
 	}
+	
 	/**
 	 *	Called when there is a warning when parsing the file
 	 *	builds the exception message and throws a SAXException with that message
@@ -107,6 +110,7 @@ public class Parser extends DefaultHandler{
 		String error = "Warning at "+e.getLineNumber()+"\t"+e.getMessage();
 		throw new SAXException(error);
 	}
+	
 	/**
 	 * Gets a Point object parsed from the xml document according to its tag
 	 * @param tag
@@ -140,18 +144,14 @@ public class Parser extends DefaultHandler{
 	 * in the respective xml file 
 	 */
 	public Edge getEdge(String tag) throws SAXException{
-	
-			
-			try {
-				int cost =inputs.get(tag+"cost")[0];
-			return new Edge(new Point(inputs.get(tag)[0], 
-					inputs.get(tag)[1]), new Point(inputs.get(tag)[2], inputs.get(tag)[3]), cost);
-			}catch(NullPointerException e){
-				String error = "Error getting Edge with tag: "+tag+"\twrong number of zones specified or cost undefined or tag does not exist";
-				throw new SAXException(error);
-			}
-				
-			
+		try {
+			int cost =inputs.get(tag+"cost")[0];
+		return new Edge(new Point(inputs.get(tag)[0], 
+				inputs.get(tag)[1]), new Point(inputs.get(tag)[2], inputs.get(tag)[3]), cost);
+		}catch(NullPointerException e){
+			String error = "Error getting Edge with tag: "+tag+"\twrong number of zones specified or cost undefined or tag does not exist";
+			throw new SAXException(error);
+		}
 	}
 	
 	/**
