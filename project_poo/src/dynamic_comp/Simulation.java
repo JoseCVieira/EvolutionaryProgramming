@@ -8,7 +8,6 @@ import org.xml.sax.SAXException;
 import static_comp.Edge;
 import static_comp.Grid;
 import static_comp.Parser;
-import static_comp.Path;
 import static_comp.Point;
 
 /**
