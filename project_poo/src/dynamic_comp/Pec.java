@@ -19,6 +19,7 @@ public class Pec implements IPec{
 			if(o1.getTime() > o2.getTime()) return 1;
 			else if(o1.getTime() < o2.getTime()) return -1;
 			else if((o1.getTime() == o2.getTime()) && o1.getIndividual() != o2.getIndividual()) return 1;
+			else if(o1.getTime() == o2.getTime() && o1.getClass() != o2.getClass()) return 1;
 			else return 0;
 		}});
 	
