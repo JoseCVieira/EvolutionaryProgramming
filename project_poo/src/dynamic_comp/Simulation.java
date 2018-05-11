@@ -106,7 +106,7 @@ public class Simulation {
 		
 		System.out.println("\n\n\tPath of the best fit individual:\t"+best_individual.getPath());
 		
-		System.out.println(this);
+		//System.out.println(this);
 	}
 	
 	/**

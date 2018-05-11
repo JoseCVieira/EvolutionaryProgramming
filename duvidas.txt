@@ -1,8 +1,3 @@
-testes:
-- criar os testes (XML) (5 testes)
-
-falta:
-- ver FAQs
 - verificar se o UML
 - verificar se está tudo comentado
 - gerar jar

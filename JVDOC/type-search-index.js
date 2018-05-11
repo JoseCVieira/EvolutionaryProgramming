@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"static_comp","l":"Point"}]
