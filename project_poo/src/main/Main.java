@@ -46,7 +46,6 @@ public class Main {
 			System.out.print("Could not start simulation due to:\n");
 			System.out.print("\t"+e.getMessage());
 		}
-	
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
+
 /**
  * Population represents a set of the class Individuals that has an initial and a maximum number of individuals.
  * These variables are immutable.
@@ -125,5 +126,7 @@ public class Population {
 	LinkedList<Individual> getIndividuals() {
 		return individuals;
 	}
+
+
 	
 }
