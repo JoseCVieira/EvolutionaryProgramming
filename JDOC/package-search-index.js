@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"dynamic_comp"},{"l":"main"},{"l":"static_comp"}]
