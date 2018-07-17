@@ -1,6 +1,6 @@
 # Evolutionary
 
-Evolutive programming modeled, implemented with objects for Object-Oriented Programming course
+Evolutionary programming modeled, implemented with objects to find the best path between two points in a Grid for Object-Oriented Programming course.
 
 ### Description:
 
