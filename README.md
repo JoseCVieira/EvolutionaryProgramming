@@ -21,6 +21,47 @@ indicated by dashed, have cost 4. In this case, the best path is (1, 1),(1, 2),(
 (5, 1),(5, 2),(5, 3),(5, 4) with cost 12. There are shorter paths but whose cost is higher. For
 example, the path (1, 1),(1, 2),(2, 2),(3, 2),(3, 3),(4, 3),(5, 3),(5, 4) is shorter but its cost is 13.
 
+### Approach:
+
+The goal of this project is to program in Java a solution to the problem presented above using
+evolutive programming modeled and implemented with objects. The idea is to generate at instant zero a population of ν individuals, all placed at the initial point, and make it evolve until the final instant τ . Each individual z is associated with a comfort. Each individual z evolve according to its comfort, by the following random mechanisms:
+- Death
+- Reproduction
+- Move
+
+### Input file format:
+
+The file that describes the input parameters of the simulation is an XML file. The simulation
+is an element simulation whose attributes indicate the final instant (finalinst), the initial
+population (initpop) and maximum population (maxpop) of the simulation, as well as the
+sensitivity of the comfort to variations (comfortsens). The element simulation contains six
+elements:
+- The empty element grid whose attributes describe the grid dimension (colsnb and
+rowsnb).
+-  The empty element initialpoint, whose attributes describe the initial point coordinates
+(xinitial and yinitial).
+- The empty element finalpoint, whose attributes describe the final point coordinates
+(xfinal and yfinal).
+- The empty element specialcostzones which contains a list of elements zone whose
+attributes indicate its position in the grid (xinitial, yinitial, xfinal, yfinal) and
+whose content indicates the cost.
+- The element obstacles, whose the only attribute describe the number of obstacles (num),
+which contains a list of empty elements obstacle whose attributes indicate its position
+in the grid (xpos, ypos).
+- The element events, which contains three new empty elements (death, reproduction and
+move) whose attributes (param) describe the parameters related to the death, reproduction
+and move events.
+
+### Results:
+
+The program should print to the terminal at the end of the simulation the path of the best fit
+individual over all the simulation. By the best fit individual we mean:
+- if there is an individual which reached the final point, the individual z with lower cost,
+independently from the individual z being or not alive at the end of the simulation;
+- if none of the individuals reached the final point, the path of the individual z with greater
+comfort, independently from the individual z being or not alive at the end of the
+simulation.
+
 ### Contributors:
 
 	-Name: 		Carlos Henrique Silva
